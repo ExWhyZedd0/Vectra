@@ -15,7 +15,19 @@ nav {
   font-family: "Fredoka", sans-serif;
   position: sticky;
   top: 0;
+  left: 0;
+  right: 0;
+  width: 100%; 
   padding: 16px 32px;
+  z-index: 99;
+  /* Glass Effect Properties */
+  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* For Safari support */
+  /* Optional: Enhancements for a better look */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
 }
 
 nav .title {
