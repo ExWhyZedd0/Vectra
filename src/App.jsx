@@ -2,6 +2,7 @@ import { Navbar } from './components/navbar.jsx'
 import HomePageLight from './assets/Home_Page.png'
 import HomePageDark from './assets/Home_Page_Dark.png'
 import HeroImage from './assets/Hero_Vectra.png'
+import Logo from './assets/Vectra-Logo.svg'
 import './App.css'
 
 function App() {
