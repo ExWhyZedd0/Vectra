@@ -75,7 +75,7 @@ nav a:not(.title):hover {
   transform: scale(1.1);
 }
 
-/* Style for the active NavLink */
+/* NavLink Active */
 nav a.active {
   /* background-color: #001a4c; */
   text-shadow: #00FFA3 0px 0px 8px;
@@ -101,7 +101,7 @@ nav .menu span {
   border-radius: 3px;
 }
 
-/* MOBILE VIEW */
+/* Mobile View */
 @media (max-width: 768px) {
   nav .menu {
     display: flex;
