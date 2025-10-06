@@ -67,3 +67,11 @@
   width: 600px;
   font-size: 24px;
 }
+
+/* Mobile View */
+@media (max-width: 768px) {
+  .hero-content {
+    flex-direction: column;
+    align-items: center
+  }
+}
