@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://ExWhyZedd0.github.io/Vectra",
+  "homepage": "https://exwhyzedd0.github.io/Vectra",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
