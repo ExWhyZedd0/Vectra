@@ -34,7 +34,7 @@ function App() {
         <div className='hero-content'>
           <img src={HeroImage} alt="" className='hero-image'/>
           <div className='hero-text-container'>
-          <h1 className='hero-text'>The future of world is here</h1>
+          {/* <h1 className='hero-text'>The future of world is here</h1> */}
           <TextType 
             text={["The future of world is here"]}
             typingSpeed={75}

@@ -18,7 +18,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Fredoka', sans-serif, 'Audiowide', cursive;
+  font-family: 'Audiowide', cursive;
 }
 
 .navbar-container {
@@ -98,7 +98,7 @@
 }
 
 .hero-typed-text {
-  font-family: 'Audiowide', cursive;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 48px;
 }
 
