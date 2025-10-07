@@ -1,6 +1,5 @@
 import React from 'react'
 import { Navbar } from './components/navbar.jsx'
-import MagicBento from './components/magicbento.jsx'
 import HomePageLight from './assets/Home_Page.png'
 import HomePageDark from './assets/Home_Page_Dark.png'
 import HeroImage from './assets/Hero_Vectra.png'
@@ -21,7 +20,7 @@ function App() {
         </div>
       </section>
       <section className='body-section'>
-        <MagicBento 
+        {/* <MagicBento 
           textAutoHide={true}
           enableStars={true}
           enableSpotlight={true}
@@ -32,7 +31,7 @@ function App() {
           spotlightRadius={300}
           particleCount={12}
           glowColor="132, 0, 255"
-        />
+        /> */}
       </section>
       <main>
 

@@ -18,7 +18,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Fredoka', sans-serif;
+  font-family: 'Fredoka', sans-serif, 'Audiowide', cursive;
 }
 
 .hero-section {
@@ -113,7 +113,7 @@
     width: 100%;
     text-align: center;
     font-size: 40px;
-    font-family: 'AudioWide', cursive;
+    font-family: 'Audiowide', cursive;
   }
 
   .hero-subtext{
