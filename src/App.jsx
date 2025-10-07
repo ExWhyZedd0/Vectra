@@ -1,7 +1,10 @@
 import React, { useState, useEffect} from 'react'
+// Components
 import { Navbar } from './components/navbar.jsx'
 import MagicBento from './components/magicbento.jsx'
 import DarkVeil from './components/darkveil.jsx'
+import TextType from './components/texttype.jsx';
+// Assets
 import HomePageLight from './assets/Home_Page.png'
 import HomePageDark from './assets/Home_Page_Dark.png'
 import HeroImage from './assets/Hero_Vectra.png'
@@ -32,6 +35,14 @@ function App() {
           <img src={HeroImage} alt="" className='hero-image'/>
           <div className='hero-text-container'>
           <h1 className='hero-text'>The future of world is here</h1>
+          <TextType 
+            text={["The future of world is here"]}
+            typingSpeed={75}
+            pauseDuration={1500}
+            showCursor={true}
+            cursorCharacter="|"
+            className='hero-typed-text'
+          />
           <p className='hero-subtext'>The future of finance, in your hands. Trade crypto assets with advanced speed and security.</p>
           </div>
         </div>

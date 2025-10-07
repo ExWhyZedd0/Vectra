@@ -49,12 +49,12 @@
   justify-content: top;
   align-items: center;
   color: #efefef;
-  transition: padding-top 0.4s ease-out;
+  transition: padding-top 0.6s ease-out;
   /* border: #efefef 1px solid; */
 }
 
 .navbar-container.is-at-top ~ .hero-section {
-  padding-top: 100px;
+  padding-top: 105px;
 }
 
 .hero-content {
@@ -84,6 +84,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  font-family: 'Audiowide', cursive;
   /* border: #efefef 1px solid; */
 }
 
@@ -94,6 +95,11 @@
   font-weight: 500;
   font-family: 'Audiowide', cursive;
   /* border: #efefef 1px solid; */
+}
+
+.hero-typed-text {
+  font-family: 'Audiowide', cursive;
+  font-size: 48px;
 }
 
 .hero-subtext{
