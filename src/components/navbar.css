@@ -12,23 +12,36 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #00FFA3;
+  color: #efefef;
   font-family: "Fredoka", sans-serif;
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  width: 100%; 
+  /* HAPUS position: sticky; */
+  /* GANTI dengan properti di bawah */
+  width: 100%;
   padding: 4px 32px;
   z-index: 99;
-  /* Glass Effect Properties */
-  background: rgba(255, 255, 255, 0.1); /* Semi-transparent white background */
+  
+  /* Glass Effect Properties (ini tetap sama) */
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* For Safari support */
-  /* Optional: Enhancements for a better look */
+  -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  
+  /* TAMBAHKAN INI: Sembunyikan navbar di atas layar & buat transparan */
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+}
 
+.navbar-container:hover nav {
+  /* Tampilkan navbar saat container di-hover */
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.navbar-container.is-at-top nav {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 nav .title {

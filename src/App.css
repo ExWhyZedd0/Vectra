@@ -21,16 +21,40 @@
   font-family: 'Fredoka', sans-serif, 'Audiowide', cursive;
 }
 
+.navbar-container {
+  position: fixed; /* Tetap di posisi yang sama saat di-scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Area hover setinggi 60px, bisa disesuaikan */
+  z-index: 100; /* Pastikan berada di atas konten lain */
+  transition: all 0.3s ease; /* Transisi halus (opsional) */
+}
+
+.background-veil {
+  position: fixed; /* Tetap di tempat saat scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* 100% tinggi viewport */
+  z-index: -1; /* SANGAT PENTING: menempatkan di belakang semua konten lain */
+  overflow: hidden; /* Mencegah scrollbar jika ada overflow kecil */
+}
+
 .hero-section {
   width: 100%;
-  height: fit-content;
+  height: 100vh;
   display: flex;
-  padding-top: 10px;
   padding-bottom: 10px;
   justify-content: top;
   align-items: center;
   color: #efefef;
+  transition: padding-top 0.4s ease-out;
   /* border: #efefef 1px solid; */
+}
+
+.navbar-container.is-at-top ~ .hero-section {
+  padding-top: 100px;
 }
 
 .hero-content {
