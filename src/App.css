@@ -14,10 +14,31 @@
   }
 }
 
+@keyframes pulse-hero {
+  0%, 100% {
+    text-shadow: #00FFA3 0px 0px 2px;
+    /* opacity: 0.6; */
+  }
+  50% {
+    text-shadow: #00FFA3 0px 0px 10px;
+    /* opacity: 1; */
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.background-veil {
+  position: fixed; /* Tetap di tempat saat scroll */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh; /* 100% tinggi viewport */
+  z-index: -1; /* SANGAT PENTING: menempatkan di belakang semua konten lain */
+  overflow: hidden; /* Mencegah scrollbar jika ada overflow kecil */
 }
 
 .navbar-container {
@@ -29,16 +50,6 @@
   z-index: 100; /* Pastikan berada di atas konten lain */
   transition: all 0.3s ease; /* Transisi halus (opsional) */
   font-family: 'Fredoka', sans-serif;
-}
-
-.background-veil {
-  position: fixed; /* Tetap di tempat saat scroll */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh; /* 100% tinggi viewport */
-  z-index: -1; /* SANGAT PENTING: menempatkan di belakang semua konten lain */
-  overflow: hidden; /* Mencegah scrollbar jika ada overflow kecil */
 }
 
 .hero-section {
@@ -100,6 +111,7 @@
 .hero-typed-text {
   font-family: 'Audiowide', cursive;
   font-size: 48px;
+  /* animation: pulse-hero 1.5s infinite; */
 }
 
 .hero-subtext{
@@ -108,6 +120,13 @@
   font-size: 24px;
   font-family: 'Fredoka', sans-serif;
   /* border: #efefef 1px solid; */
+}
+
+.body-section {
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Tablet View */

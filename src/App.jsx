@@ -3,7 +3,8 @@ import React, { useState, useEffect} from 'react'
 import { Navbar } from './components/navbar.jsx'
 import MagicBento from './components/magicbento.jsx'
 import DarkVeil from './components/darkveil.jsx'
-import TextType from './components/texttype.jsx';
+import TextType from './components/texttype.jsx'
+import DecryptedText from './components/decryptedtext.jsx'
 // Assets
 import HomePageLight from './assets/Home_Page.png'
 import HomePageDark from './assets/Home_Page_Dark.png'
@@ -47,6 +48,9 @@ function App() {
         </div>
       </section>
       <section className='body-section'>
+        {/* <div className='body-text' >
+          <h1>Trading bersama 390 juta pengguna di <Span>Vectra</Span>Vectra</h1>
+        </div> */}
         <MagicBento 
           textAutoHide={true}
           enableStars={true}
@@ -58,7 +62,7 @@ function App() {
           spotlightRadius={300}
           particleCount={12}
           glowColor="132, 0, 255"
-        />
+          />
       </section>
       <main>
 

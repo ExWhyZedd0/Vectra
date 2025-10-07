@@ -14,8 +14,6 @@ nav {
   align-items: center;
   color: #efefef;
   font-family: "Fredoka", sans-serif;
-  /* HAPUS position: sticky; */
-  /* GANTI dengan properti di bawah */
   width: 100%;
   padding: 4px 32px;
   z-index: 99;
