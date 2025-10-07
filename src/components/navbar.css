@@ -1,3 +1,4 @@
+/* Navbar Section */
 @keyframes pulse {
   0%, 100% {
     opacity: 0.6;;
@@ -37,6 +38,7 @@ nav .title {
   text-decoration: none;
   font-family: 'Audiowide', cursive;
   color: #00FFA3;
+  gap: 4px;
 }
 
 nav .title p {
@@ -101,8 +103,21 @@ nav .menu span {
   border-radius: 3px;
 }
 
+/* Body Section */
+
+.body-section {
+
+  height: 100vh;
+  border: #efefef 1px solid;
+}
+
+
+
+
+/* MEDIA QUERIES */
 /* Mobile View */
 @media (max-width: 768px) {
+
   nav .menu {
     display: flex;
   }
