@@ -62,8 +62,9 @@ function App() {
           clickEffect={true}
           spotlightRadius={300}
           particleCount={12}
-          glowColor="132, 0, 255"
+          className = 'bento-section'
           />
+
       </section>
       <section className='footer-section'>
         {/* <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }}>
