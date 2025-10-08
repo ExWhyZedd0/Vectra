@@ -1,8 +1,9 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 // Components
 import { Navbar } from './components/navbar.jsx'
 import MagicBento from './components/magicbento.jsx'
 import DarkVeil from './components/darkveil.jsx'
+import LaserFlow from './components/laserflow.jsx'
 import TextType from './components/texttype.jsx'
 import DecryptedText from './components/decryptedtext.jsx'
 // Assets
@@ -63,6 +64,11 @@ function App() {
           particleCount={12}
           glowColor="132, 0, 255"
           />
+      </section>
+      <section className='footer-section'>
+        {/* <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }}>
+          <LaserFlow />
+        </div> */}
       </section>
       <main>
 

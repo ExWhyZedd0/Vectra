@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 
 const DEFAULT_PARTICLE_COUNT = 12;
 const DEFAULT_SPOTLIGHT_RADIUS = 300;
-const DEFAULT_GLOW_COLOR = '132, 0, 255';
+const DEFAULT_GLOW_COLOR = '0, 255, 163'; //#00ffA3
 const MOBILE_BREAKPOINT = 768;
 
 const cardData = [
@@ -24,24 +24,6 @@ const cardData = [
     title: 'Collaboration',
     description: 'Work together seamlessly',
     label: 'Teamwork'
-  },
-  {
-    color: '#060010',
-    title: 'Automation',
-    description: 'Streamline workflows',
-    label: 'Efficiency'
-  },
-  {
-    color: '#060010',
-    title: 'Integration',
-    description: 'Connect favorite tools',
-    label: 'Connectivity'
-  },
-  {
-    color: '#060010',
-    title: 'Security',
-    description: 'Enterprise-grade protection',
-    label: 'Protection'
   }
 ];
 
@@ -503,9 +485,9 @@ const MagicBento = ({
             --border-color: #392e4e;
             --background-dark: #060010;
             --white: hsl(0, 0%, 100%);
-            --purple-primary: rgba(132, 0, 255, 1);
-            --purple-glow: rgba(132, 0, 255, 0.2);
-            --purple-border: rgba(132, 0, 255, 0.8);
+            --green-primary: rgba(0, 255, 163, 1);
+            --green-glow: rgba(0, 255, 163, 0.2);
+            --green-border: rgba(0, 255, 163, 0.8);
           }
           
           .card-responsive {
@@ -523,22 +505,12 @@ const MagicBento = ({
           
           @media (min-width: 1024px) {
             .card-responsive {
-              grid-template-columns: repeat(4, 1fr);
+              grid-template-columns: repeat(2, 1fr);
             }
-            
+              
             .card-responsive .card:nth-child(3) {
-              grid-column: span 2;
+              grid-column: 2;
               grid-row: span 2;
-            }
-            
-            .card-responsive .card:nth-child(4) {
-              grid-column: 1 / span 2;
-              grid-row: 2 / span 2;
-            }
-            
-            .card-responsive .card:nth-child(6) {
-              grid-column: 4;
-              grid-row: 3;
             }
           }
           
