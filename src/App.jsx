@@ -58,10 +58,10 @@ function App() {
           enableSpotlight={true}
           enableBorderGlow={true}
           enableTilt={true}
-          enableMagnetism={true}
+          enableMagnetism={false}
           clickEffect={true}
-          spotlightRadius={300}
-          particleCount={12}
+          spotlightRadius={250}
+          particleCount={24}
           className = 'bento-section'
           />
 
