@@ -26,6 +26,19 @@ function App() {
   }, []);
   return (
     <>
+    <svg width="0" height="0" style={{ position: 'absolute' }}>
+      <clipPath id="rounded-trapezoid" clipPathUnits="objectBoundingBox">
+        <path d="M 0.00,0.10
+                A 0.10,0.10 0 0 1 0.10,0.00
+                L 0.90,0.00
+                A 0.10,0.10 0 0 1 1.00,0.10
+                L 1.00,0.80
+                A 0.10,0.10 0 0 1 0.90,0.90
+                L 0.10,1.00
+                A 0.10,0.10 0 0 1 0.00,0.90
+                Z" />
+      </clipPath>
+    </svg>
       <div className={`navbar-container ${isAtTop ? 'is-at-top' : ''}`}>
       <Navbar />
       </div>
@@ -52,7 +65,13 @@ function App() {
         {/* <div className='body-text' >
           <h1>Trading bersama 390 juta pengguna di <Span>Vectra</Span>Vectra</h1>
         </div> */}
-        <MagicBento 
+        {/* <div class="trapezoid">
+          <p>Anda bisa memasukkan konten di sini.</p>
+        </div>
+        <div class="trapesium-tumpul">
+          <p>Konten dengan sudut tumpul!</p>
+        </div> */}
+        {/* <MagicBento 
           textAutoHide={true}
           enableStars={true}
           enableSpotlight={true}
@@ -63,14 +82,38 @@ function App() {
           spotlightRadius={250}
           particleCount={24}
           className = 'bento-section'
-          />
-
+        /> */}
+        <p className='body-title'>Trade with 390 million users on Vectra</p>  
+        <div className='bento-box-section'>
+          <div className='bento-box-container'>
+            <div className='bento-box-wrap'>
+              <div className='bento-box-tv-mc'>
+                <div className='bento-box-trading-volume'>
+                  <p className='bento-box-title'>24h trading volume</p>
+                  <p className='bento-box-description'></p>
+                </div>
+                <div className='bento-market-cap'>
+                  <p className='bento-box-title'>Market Cap</p>
+                  <p className='bento-box-description'></p>
+                </div>
+              </div>
+              <div className='bento-news'>
+                <p className='bento-box-title'>News</p>
+                <p className='bento-box-description'></p>
+              </div>
+            </div>
+            <div className='bento-popular'>
+              <p className='bento-box-title'>Most Popular</p>
+              <p className='bento-box-description'></p>
+            </div>
+          </div>
+        </div>
       </section>
-      <section className='footer-section'>
-        {/* <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }}>
+      {/* <section className='footer-section'>
+        <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }}>
           <LaserFlow />
-        </div> */}
-      </section>
+        </div>
+      </section> */}
       <main>
 
       </main>

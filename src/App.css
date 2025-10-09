@@ -1,5 +1,6 @@
 :root {
   background: #1A1C20;
+  overflow-x: hidden;
 }
 
 @keyframes floating {
@@ -180,21 +181,190 @@
   /* border: #efefef 1px solid; */
 }
 
+/* Body-Section */
 .body-section {
   width: 100%;
   height: 100vh;
   align-items: center;
   justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: #efefef;
+  font-family: 'Fredoka', sans-serif;
+  /* border: #efefef 1px solid; */
+}
+
+.body-section * {
+  border: #efefef 1px solid;
+}
+
+/* .trapezoid {
+  background-color: #00FFA3;
+  width: 380px;
+  height: 400px;
+  border-radius: 10px 20px 30px 40px;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 85%, 0% 100%);
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 40px;
+  text-align: center;
+}
+
+.trapesium-tumpul {
+  width: 380px;
+  height: 400px;
+  background-color: #00FFA3;
+  clip-path: url(#rounded-trapezoid);
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .bento-section {
   width: 100%;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   border: #efefef 1px solid;
+} */
 
+.body-title {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: left;;
+  font-size: 38px;
+  margin-bottom: 32px;
+  font-family: 'Fredoka', sans-serif;
+  /* border: #efefef 1px solid; */
+}
+
+.bento-box-section {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* border: #efefef 1px solid; */
+}
+
+.bento-box-container {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /* display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  padding: 0 32px;
+  border: #efefef 1px solid; */
+}
+
+.bento-box-wrap {
+  display: flex;
+  flex-direction: column
+}
+
+.bento-box-tv-mc {
+  display: flex;
+  flex-direction: row;
+}
+
+.bento-box-trading-volume {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  color: #efefef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
+  width: 280px;
+  height: 180px;
+  margin: 12px;
+}
+
+.bento-market-cap {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  color: #efefef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
+  width: 280px;
+  height: 180px;
+  margin: 12px;
+}
+
+.bento-popular {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  color: #efefef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
+  width: 280px;
+  height: 384px;
+  margin: 12px;
+}
+
+.bento-news {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  color: #efefef;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: 'Fredoka', sans-serif;
+  width: 584px;
+  height: 180px;
+  margin: 12px;
+}
+
+
+
+.footer-section {
+  width: 100%;
+  height: 100vh;
+  border: #efefef 1px solid;
 }
 
 /* Tablet View */

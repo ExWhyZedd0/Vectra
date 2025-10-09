@@ -491,10 +491,11 @@ const MagicBento = ({
           }
           
           .card-responsive {
-            grid-template-columns: 1fr;
-            width: 90%;
-            margin: 0 auto;
-            padding: 0.5rem;
+            grid-template-columns: 300px 1fr;
+            grid-auto-rows: 1fr;
+            // width: 90%;
+            // margin: 0 auto;
+            // padding: 0.5rem;
           }
           
           @media (min-width: 600px) {
@@ -505,12 +506,20 @@ const MagicBento = ({
           
           @media (min-width: 1024px) {
             .card-responsive {
-              grid-template-columns: repeat(2, 1fr);
-            }
+              /* Kolom 1: lebar 300px
+                Kolom 2: lebar mengisi sisa ruang
+              */
+              grid-template-columns: 300px 1fr;
               
+              /* Baris 1 (untuk box pertama): tinggi 200px
+                Baris 2 (untuk box kedua): tinggi 250px
+              */
+              grid-template-rows: 200px 250px;
+            }
+            
             .card-responsive .card:nth-child(3) {
               grid-column: 2;
-              grid-row: span 2;
+              grid-row: span 2; /* Box ini akan otomatis memiliki tinggi total 450px (200px + 250px) */
             }
           }
           

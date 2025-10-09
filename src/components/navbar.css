@@ -114,17 +114,6 @@ nav .menu span {
   border-radius: 3px;
 }
 
-/* Body Section */
-
-.body-section {
-
-  height: 100vh;
-  border: #efefef 1px solid;
-}
-
-
-
-
 /* MEDIA QUERIES */
 /* Mobile View */
 @media (max-width: 768px) {
