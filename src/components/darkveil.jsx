@@ -10,6 +10,7 @@ const fragment = `
 #ifdef GL_ES
 precision lowp float;
 #endif
+uniform float uScrollProgress;
 uniform vec2 uResolution;
 uniform float uTime;
 uniform float uHueShift;
@@ -56,33 +57,28 @@ vec4 cppn_fn(vec2 coordinate,float in0,float in1,float in2){
     return vec4(buf[0].x,buf[0].y,buf[0].z,1.);
 }
 
-// void mainImage(out vec4 fragColor,in vec2 fragCoord){
-//     vec2 uv=fragCoord/uResolution.xy*2.-1.;
-//     uv.y*=-1.;
-//     uv+=uWarp*vec2(sin(uv.y*6.283+uTime*0.5),cos(uv.x*6.283+uTime*0.5))*0.05;
-//     fragColor=cppn_fn(uv,0.1*sin(0.3*uTime),0.1*sin(0.69*uTime),0.1*sin(0.44*uTime));
-// }
-
 void mainImage(out vec4 fragColor,in vec2 fragCoord){
     vec2 uv=fragCoord/uResolution.xy*2.-1.;
     uv.y*=-1.;
     uv+=uWarp*vec2(sin(uv.y*6.283+uTime*0.5),cos(uv.x*6.283+uTime*0.5))*0.05;
     
-    // 1. Dapatkan pola warna asli dari fungsi yang kompleks
-    vec4 originalColor = cppn_fn(uv,0.1*sin(0.3*uTime),0.1*sin(0.69*uTime),0.1*sin(0.44*uTime));
+    float intensity = cppn_fn(uv,0.1*sin(0.3*uTime),0.1*sin(0.69*uTime),0.1*sin(0.44*uTime)).r;
+
+    // Palet 1: Warna untuk Hero Section (Gelap/Hijau)
+    vec3 heroBg = vec3(0.0, 0.15, 0.1);      // Warna hijau gelap
+    vec3 heroAccent = vec3(0.0, 1.0, 0.64);     // #00FFA3
+
+    // Palet 2: Warna untuk Body Section (Hitam Pekat/Hijau)
+    vec3 bodyBg = vec3(0.0117, 0.0117, 0.0157); // #030304
+    vec3 bodyAccent = vec3(0.0, 1.0, 0.64);      // #00FFA3
+
+    vec3 heroColor = mix(heroBg, heroAccent, intensity);
+    vec3 bodyColor = mix(bodyBg, bodyAccent, intensity);
+
+    // Campurkan kedua hasil warna berdasarkan posisi scroll
+    vec3 finalColor = mix(heroColor, bodyColor, uScrollProgress);
     
-    // 2. Tentukan palet warna hijau baru Anda
-    vec3 darkGreen = vec3(0.0, 0.15, 0.1);      // Warna hijau yang sangat gelap
-    vec3 brightGreen = vec3(0.0, 1.0, 0.64); // Warna hijau terang (#00FFA3)
-    
-    // 3. Gunakan salah satu channel warna asli (misalnya merah) sebagai nilai intensitas
-    float intensity = originalColor.r;
-    
-    // 4. Campurkan kedua warna hijau berdasarkan intensitas
-    vec3 finalGreenColor = mix(darkGreen, brightGreen, intensity);
-    
-    // 5. Atur warna akhir
-    fragColor = vec4(finalGreenColor, 1.0);
+    fragColor = vec4(finalColor, 1.0);
 }
 
 void main(){
@@ -96,6 +92,7 @@ void main(){
 `;
 
 export default function DarkVeil({
+  scrollProgress,
   hueShift = 0,
   noiseIntensity = 0,
   scanlineIntensity = 0,
@@ -123,6 +120,7 @@ export default function DarkVeil({
       uniforms: {
         uTime: { value: 0 },
         uResolution: { value: new Vec2() },
+        uScrollProgress: { value: 0 },
         uHueShift: { value: hueShift },
         uNoise: { value: noiseIntensity },
         uScan: { value: scanlineIntensity },
@@ -147,6 +145,7 @@ export default function DarkVeil({
     let frame = 0;
 
     const loop = () => {
+      program.uniforms.uScrollProgress.value = scrollProgress;
       program.uniforms.uTime.value = ((performance.now() - start) / 1000) * speed;
       program.uniforms.uHueShift.value = hueShift;
       program.uniforms.uNoise.value = noiseIntensity;
@@ -163,6 +162,6 @@ export default function DarkVeil({
       cancelAnimationFrame(frame);
       window.removeEventListener('resize', resize);
     };
-  }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale]);
+  }, [scrollProgress, hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale]);
   return <canvas ref={ref} className="w-full h-full block" />;
 }

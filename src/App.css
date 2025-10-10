@@ -3,6 +3,11 @@
   overflow-x: hidden;
 }
 
+html, body {
+  overflow: hidden;
+  height: 100%;
+}
+
 @keyframes floating {
   0% {
     transform: translateY(-5px);
@@ -88,6 +93,16 @@
   padding: 0;
 }
 
+.scroll-container {
+  overflow-y: scroll; 
+  overflow-x: hidden;
+  height: 100vh;
+}
+
+.scroll-container > section {
+  scroll-snap-align: start; 
+}
+
 .background-veil {
   position: fixed;
   top: 0;
@@ -121,7 +136,7 @@
   /* border: #efefef 1px solid; */
 }
 
-.navbar-container.is-at-top ~ .hero-section {
+.scroll-container.is-at-top .hero-section {
   padding-top: 105px;
 }
 
@@ -185,13 +200,23 @@
 .body-section {
   width: 100%;
   height: 100vh;
-  align-items: center;
-  justify-content: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   color: #efefef;
   font-family: 'Fredoka', sans-serif;
+  position: relative;
   /* border: #efefef 1px solid; */
+}
+
+.spline-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Lapisan bawah */
 }
 
 .body-section * {
@@ -234,8 +259,28 @@
   border: #efefef 1px solid;
 } */
 
-.body-title {
+.bento-box-section {
   width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+  /* border: #efefef 1px solid; */
+}
+
+.bento-box-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.body-title {
+  width: fit-content;
   height: fit-content;
   display: flex;
   justify-content: left;;
@@ -245,18 +290,8 @@
   /* border: #efefef 1px solid; */
 }
 
-.bento-box-section {
-  width: 100%;
-  height: fit-content;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* border: #efefef 1px solid; */
-}
-
 .bento-box-container {
-  width: 100%;
+  width: fit-content;
   height: fit-content;
   display: flex;
   flex-direction: row;
@@ -275,8 +310,19 @@
 }
 
 .bento-box-tv-mc {
+  height: fit-content;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-and-title {
+  height: fit-content;
+  width: fit-content;
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
 .bento-box-trading-volume {
