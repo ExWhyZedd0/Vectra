@@ -13,7 +13,7 @@ import DarkVeil from './components/darkveil.jsx'
 import LaserFlow from './components/laserflow.jsx'
 import TextType from './components/texttype.jsx'
 import DecryptedText from './components/decryptedtext.jsx'
-import SplineScene from './components/SplineScene.jsx';
+import SplineScene from './components/splinescene.jsx'
 
 //Hooks
 import useOnScreen from './hooks/useOnScreen.js'
