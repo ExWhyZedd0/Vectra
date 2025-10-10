@@ -35,7 +35,7 @@ function App() {
   const heroSectionRef = useRef(null); 
   const bodySectionRef = useRef(null);
 
-  const isBodyVisible = !!useOnScreen(bodySectionRef);
+  const isBodyVisible = !!useOnScreen(bodySectionRef, scrollContainerRef);
 
   // GSAP useEffect
   useEffect(() => {
@@ -106,19 +106,6 @@ function App() {
   }, []);
   return (
     <>
-    <svg width="0" height="0" style={{ position: 'absolute' }}>
-      <clipPath id="rounded-trapezoid" clipPathUnits="objectBoundingBox">
-        <path d="M 0.00,0.10
-                A 0.10,0.10 0 0 1 0.10,0.00
-                L 0.90,0.00
-                A 0.10,0.10 0 0 1 1.00,0.10
-                L 1.00,0.80
-                A 0.10,0.10 0 0 1 0.90,0.90
-                L 0.10,1.00
-                A 0.10,0.10 0 0 1 0.00,0.90
-                Z" />
-      </clipPath>
-    </svg>
       <div className={`navbar-container ${isAtTop ? 'is-at-top' : ''}`}>
       <Navbar />
       </div>
@@ -132,7 +119,7 @@ function App() {
             <div className='hero-text-container'>
             <TextType 
               text={["The future of world is here"]}
-              typingSpeed={75}
+              typingSpeed={30}
               pauseDuration={1500}
               showCursor={true}
               cursorCharacter="|"
@@ -147,11 +134,12 @@ function App() {
             <SplineScene />
           </div>
           <div className={`bento-box-section ${isBodyVisible ? 'is-visible' : ''}`}>
+            <p className='bento-section-title'><span>Trade with 390 million users on </span> Vectra</p>
             <div className='bento-box-container'>
               <div className='bento-box-wrap'>
                 <div className='bento-and-title'>
                 <div className='bento-box-tv-mc'>
-                  <div className='bento-box-trading-volume'>
+                  <div className='bento-trading-volume'>
                     <p className='bento-box-title'>24h trading volume</p>
                     <p className='bento-box-description'></p>
                   </div>
@@ -160,7 +148,7 @@ function App() {
                     <p className='bento-box-description'></p>
                   </div>
                 </div>
-                <p className='body-title'>Trade with 390 million users on Vectra</p>
+                {/* <p className='bento-section-title'>Trade with 390 million users on Vectra</p> */}
                 </div>
                 <div className='bento-news'>
                   <p className='bento-box-title'>News</p>
@@ -174,7 +162,7 @@ function App() {
             </div>
           </div>
         </section>
-        {/* <section className='footer-section'>
+        {/* <section className='footer-section' ref={footerSectionRef}>
           <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }}>
             <LaserFlow />
           </div>

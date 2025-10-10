@@ -18,21 +18,18 @@ nav {
   padding: 4px 32px;
   z-index: 99;
   
-  /* Glass Effect Properties (ini tetap sama) */
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   
-  /* TAMBAHKAN INI: Sembunyikan navbar di atas layar & buat transparan */
   transform: translateY(-100%);
   opacity: 0;
   transition: transform 0.4s ease-out, opacity 0.4s ease-out;
 }
 
 .navbar-container:hover nav {
-  /* Tampilkan navbar saat container di-hover */
   transform: translateY(0);
   opacity: 1;
 }
