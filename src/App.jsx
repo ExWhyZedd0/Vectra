@@ -34,13 +34,14 @@ function App() {
   const scrollContainerRef = useRef(null);
   const heroSectionRef = useRef(null); 
   const bodySectionRef = useRef(null);
+  const footerSectionRef = useRef(null);
 
-  const isBodyVisible = !!useOnScreen(bodySectionRef, scrollContainerRef);
+  const isBodyVisible = !!useOnScreen(bodySectionRef, scrollContainerRef, footerSectionRef);
 
   // GSAP useEffect
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container || !heroSectionRef.current || !bodySectionRef.current) return;
+    if (!container || !heroSectionRef.current || !bodySectionRef.current || !footerSectionRef.current) return;
 
     const handleWheel = (event) => {
       if (isAnimating) {
@@ -51,7 +52,7 @@ function App() {
 
       const scrollAmount = event.deltaY;
       const currentScroll = container.scrollTop;
-      const sections = [heroSectionRef.current, bodySectionRef.current];
+      const sections = [heroSectionRef.current, bodySectionRef.current, footerSectionRef.current];
       
       let currentIndex = sections.findIndex(section => currentScroll < section.offsetTop + section.clientHeight / 2);
       if (currentIndex === -1) currentIndex = 0;
@@ -162,11 +163,12 @@ function App() {
             </div>
           </div>
         </section>
-        {/* <section className='footer-section' ref={footerSectionRef}>
-          <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }}>
+        <section className='footer-section' ref={footerSectionRef}>
+          {/* <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }}>
             <LaserFlow />
-          </div>
-        </section> */}
+          </div> */}
+          <p>© 2025 Vectra. All rights reserved.</p>
+        </section>
       </main>
     </>
   )
