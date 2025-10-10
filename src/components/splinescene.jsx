@@ -1,11 +1,7 @@
-import Spline from '@splinetool/react-spline/next';
+import Spline from '@splinetool/react-spline';
 
-export default function Home() {
+export default function App() {
   return (
-    <main>
-      <Spline
-        scene="https://prod.spline.design/TGu7hytiM4V5WrZm/scene.splinecode" 
-      />
-    </main>
+    <Spline scene="https://prod.spline.design/GJSApDsp3tEft9Gk/scene.splinecode" />
   );
 }
