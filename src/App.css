@@ -245,7 +245,7 @@ html, body {
 }
 
 .body-section * {
-  /* border: #efefef 1px solid; */
+  border: #efefef 1px solid;
 }
 
 .scroll-container.is-at-top .body-section {
@@ -270,14 +270,12 @@ html, body {
   justify-content: space-between;
   position: relative;
   z-index: 2;
-  /* opacity: 0; */
   transform: translateY(50px);
   transition: opacity 1s ease-out, transform 1s ease-out;
   padding-left: 128px;
   padding-right: 128px;
   padding-top: 32px;
   padding-bottom: 32px
-  /* border: #efefef 1px solid; */
 }
 
 .bento-box-section.is-visible {
@@ -313,16 +311,8 @@ html, body {
 .bento-section-title {
   width: fit-content;
   height: fit-content;
-  
-  /* background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 16px; */
-
   padding: 16px;
-  justify-content: left;;
+  justify-content: center;
   font-size: 48px;
   margin-bottom: 32px;
   font-weight: 500;
@@ -333,24 +323,33 @@ html, body {
 .bento-section-title span{
   width: fit-content;
   height: fit-content;
-  justify-content: left;
+  justify-content: center;
   font-size: 48px;
  font-family: 'Fredoka', sans-serif;
 }
 
-.bento-box-container {
-  width: fit-content;
-  height: fit-content;
+.bento-box {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  /* border: #efefef 1px solid; */
+}
+
+.bento-box-container{
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center
 }
 
 .bento-box-wrap {
+  width: fit-content;
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 .bento-box-tv-mc {
@@ -427,7 +426,7 @@ html, body {
   text-align: center;
   font-family: 'Fredoka', sans-serif;
   width: 280px;
-  height: 384px;
+  height: 588px;
   margin: 12px;
   opacity: 0;
 }
@@ -447,7 +446,7 @@ html, body {
   justify-content: center;
   text-align: center;
   font-family: 'Fredoka', sans-serif;
-  width: 584px;
+  width: 912px;
   height: 180px;
   margin: 12px;
   opacity: 0;

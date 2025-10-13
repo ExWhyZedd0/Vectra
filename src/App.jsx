@@ -14,6 +14,7 @@ import LaserFlow from './components/laserflow.jsx'
 import TextType from './components/texttype.jsx'
 import DecryptedText from './components/decryptedtext.jsx'
 import SplineScene from './components/splinescene.jsx'
+import BentoBox from './components/bentobox.jsx'
 
 //Hooks
 import useOnScreen from './hooks/useOnScreen.js'
@@ -131,31 +132,34 @@ function App() {
           <div className='spline-background'>
             <SplineScene />
           </div>
+          {/* <BentoBox isVisible={isBodyVisible} /> */}
           <div className={`bento-box-section ${isBodyVisible ? 'is-visible' : ''}`}>
             <p className='bento-section-title'><span>Trade with 390 million users on </span> Vectra</p>
-            <div className='bento-box-container'>
-              <div className='bento-box-wrap'>
-                <div className='bento-and-title'>
-                <div className='bento-box-tv-mc'>
-                  <div className='bento-trading-volume'>
-                    <p className='bento-box-title'>24h trading volume</p>
-                    <p className='bento-box-description'></p>
+            <div className='bento-box'>
+              <div className='bento-box-container'>
+                <div className='bento-box-wrap'>
+                  <div className='bento-and-title'>
+                  <div className='bento-box-tv-mc'>
+                    <div className='bento-trading-volume'>
+                      <p className='bento-box-title'>24h trading volume</p>
+                      <p className='bento-box-description'></p>
+                    </div>
+                    <div className='bento-market-cap'>
+                      <p className='bento-box-title'>Market Cap</p>
+                      <p className='bento-box-description'></p>
+                    </div>
                   </div>
-                  <div className='bento-market-cap'>
-                    <p className='bento-box-title'>Market Cap</p>
+                  {/* <p className='bento-section-title'><span>Trade with 390 million users on </span>Vectra</p> */}
+                  </div>
+                  <div className='bento-news'>
+                    <p className='bento-box-title'>News</p>
                     <p className='bento-box-description'></p>
                   </div>
                 </div>
-                {/* <p className='bento-section-title'>Trade with 390 million users on Vectra</p> */}
-                </div>
-                <div className='bento-news'>
-                  <p className='bento-box-title'>News</p>
+                <div className='bento-popular'>
+                  <p className='bento-box-title'>Most Popular</p>
                   <p className='bento-box-description'></p>
                 </div>
-              </div>
-              <div className='bento-popular'>
-                <p className='bento-box-title'>Most Popular</p>
-                <p className='bento-box-description'></p>
               </div>
             </div>
           </div>
