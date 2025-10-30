@@ -399,48 +399,10 @@ function App() {
                           </div>
                         </div>
                       </div>
-                      {/* <div className="bento-news">
-                        <p className="bento-box-title">News (Top 3)</p>
-                        <div className="bento-box-description text-gray-300 mt-2 w-full text-left overflow-y-auto h-[120px] pr-2">
-                          {loading && "Memuat berita..."}
-
-                          {error && !newsData.length && (
-                            <p className="text-red-400 text-sm">{error}</p>
-                          )}
-
-                          {!loading && newsData.length > 0 && (
-                            <ul className="space-y-2">
-                              {newsData.map((article) => (
-                                <li key={article.url} className="text-sm">
-                                  <a
-                                    href={article.url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="font-semibold hover:underline"
-                                    title={article.title}
-                                  >
-                                    {article.title.substring(0, 60)}...
-                                  </a>
-                                  <p className="text-xs text-gray-400">
-                                    {article.source.name}
-                                  </p>
-                                </li>
-                              ))}
-                            </ul>
-                          )}
-
-                          {!loading && !error && newsData.length === 0 && (
-                            <p className="text-gray-400">
-                              Tidak ada berita terbaru.
-                            </p>
-                          )}
-                        </div>
-                      </div> */}
                       <div className="bento-news">
                         <p className="bento-box-title">News</p>
                         <p className="bento-box-description text-gray-300 mt-2">
                           {loading && "Memuat..."}
-                          {/* isi data*/}
                           <p className="bento-box-description text-3xl font-bold mt-2">
                             {loading && "Memuat..."}
                             {error && "Error"}
