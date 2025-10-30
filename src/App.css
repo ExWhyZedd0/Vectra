@@ -1,9 +1,10 @@
 :root {
-  background: #1A1C20;
+  background: #1a1c20;
   overflow-x: hidden;
 }
 
-html, body {
+html,
+body {
   overflow: hidden;
   height: 100%;
 }
@@ -16,16 +17,17 @@ html, body {
     transform: translateY(10px);
   }
   100% {
-    transform: translateY(-5px); 
+    transform: translateY(-5px);
   }
 }
 
 @keyframes pulse-hero {
-  0%, 100% {
-    text-shadow: #00FFA3 0px 0px 2px;
+  0%,
+  100% {
+    text-shadow: #00ffa3 0px 0px 2px;
   }
   50% {
-    text-shadow: #00FFA3 0px 0px 10px;
+    text-shadow: #00ffa3 0px 0px 10px;
   }
 }
 
@@ -59,7 +61,7 @@ html, body {
   }
 }
 
-@keyframes slide-in-left{
+@keyframes slide-in-left {
   0% {
     transform: translateX(-100%);
     opacity: 0;
@@ -122,7 +124,7 @@ html, body {
 }
 
 .scroll-container {
-  overflow-y: scroll; 
+  overflow-y: scroll;
   overflow-x: hidden;
   height: 100vh;
 }
@@ -132,7 +134,7 @@ html, body {
 }
 
 .scroll-container > section {
-  scroll-snap-align: start; 
+  scroll-snap-align: start;
 }
 
 .background-veil {
@@ -156,7 +158,7 @@ html, body {
   align-self: center;
   z-index: 100;
   transition: all 0.3s ease;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
 }
 
 .hero-section {
@@ -188,7 +190,7 @@ html, body {
   /* border: #efefef 1px solid; */
 }
 
-.hero-image{
+.hero-image {
   display: flex;
   /* max-width: 600px; */
   width: 40%;
@@ -202,7 +204,7 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  font-family: 'Audiowide', cursive;
+  font-family: "Audiowide", cursive;
   /* border: #efefef 1px solid; */
 }
 
@@ -211,21 +213,21 @@ html, body {
   display: flex;
   justify-content: center;
   font-weight: 500;
-  font-family: 'Audiowide', cursive;
+  font-family: "Audiowide", cursive;
   /* border: #efefef 1px solid; */
 }
 
 .hero-typed-text {
-  font-family: 'Audiowide', cursive;
+  font-family: "Audiowide", cursive;
   font-size: 48px;
   /* animation: pulse-hero 1.5s infinite; */
 }
 
-.hero-subtext{
+.hero-subtext {
   max-width: 700px;
   display: flex;
   font-size: 24px;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   animation: fade-in 2.5s ease-in-out forwards;
   /* border: #efefef 1px solid; */
 }
@@ -239,14 +241,14 @@ html, body {
   align-items: center;
   justify-content: center;
   color: #efefef;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   position: relative;
   /* border: #efefef 1px solid; */
 }
 
-.body-section * {
+/* .body-section * {
   border: #efefef 1px solid;
-}
+} */
 
 .scroll-container.is-at-top .body-section {
   padding-top: 105px;
@@ -275,7 +277,7 @@ html, body {
   padding-left: 128px;
   padding-right: 128px;
   padding-top: 32px;
-  padding-bottom: 32px
+  padding-bottom: 32px;
 }
 
 .bento-box-section.is-visible {
@@ -289,7 +291,7 @@ html, body {
 }
 
 .bento-box-section.is-visible .bento-trading-volume {
-  animation: slide-in-left 1.5s ease-in-out  forwards;
+  animation: slide-in-left 1.5s ease-in-out forwards;
   opacity: 1;
 }
 
@@ -316,16 +318,16 @@ html, body {
   font-size: 48px;
   margin-bottom: 32px;
   font-weight: 500;
-  font-family: 'Audiowide', cursive;
+  font-family: "Audiowide", cursive;
   opacity: 0;
 }
 
-.bento-section-title span{
+.bento-section-title span {
   width: fit-content;
   height: fit-content;
   justify-content: center;
   font-size: 48px;
- font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
 }
 
 .bento-box {
@@ -337,13 +339,13 @@ html, body {
   align-items: center;
 }
 
-.bento-box-container{
+.bento-box-container {
   width: fit-content;
   height: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center
+  align-items: center;
 }
 
 .bento-box-wrap {
@@ -382,7 +384,7 @@ html, body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   width: 280px;
   height: 180px;
   margin: 12px;
@@ -403,7 +405,7 @@ html, body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   width: 280px;
   height: 180px;
   margin: 12px;
@@ -424,9 +426,9 @@ html, body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   width: 280px;
-  height: 588px;
+  height: 590px;
   margin: 12px;
   opacity: 0;
 }
@@ -445,7 +447,7 @@ html, body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   width: 912px;
   height: 180px;
   margin: 12px;
@@ -457,7 +459,7 @@ html, body {
   width: 100%;
   height: 100vh;
   color: #efefef;
-  font-family: 'Fredoka', sans-serif;
+  font-family: "Fredoka", sans-serif;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -467,14 +469,13 @@ html, body {
 
 /* Tablet View */
 @media (max-width: 1024px) {
-  .hero-text{
-  font-size: 28px;
+  .hero-text {
+    font-size: 28px;
   }
 
-  .hero-subtext{
+  .hero-subtext {
     font-size: 20px;
   }
-
 }
 
 /* Mobile View */
@@ -493,7 +494,7 @@ html, body {
     padding: 0px;
   }
 
-  .hero-image{
+  .hero-image {
     width: 70%;
   }
 
@@ -502,20 +503,17 @@ html, body {
     padding: 10px;
   }
 
-  .hero-typed-text{
+  .hero-typed-text {
     width: 100%;
     text-align: center;
     font-size: 32px;
-    font-family: 'Audiowide', cursive;
+    font-family: "Audiowide", cursive;
   }
 
-  .hero-subtext{
+  .hero-subtext {
     width: 100%;
     text-align: center;
     font-size: 16px;
-    font-family: 'Fredoka', sans-serif;
+    font-family: "Fredoka", sans-serif;
   }
-
-
-
 }

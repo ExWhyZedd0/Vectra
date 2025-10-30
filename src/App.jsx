@@ -1,45 +1,261 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { Routes, Route } from 'react-router-dom';
+// import React, { useState, useEffect, useRef } from "react";
+// import { Routes, Route } from "react-router-dom";
+
+// // GSAP
+// import { gsap } from "gsap";
+// import { ScrollToPlugin } from "gsap/ScrollToPlugin";
+// gsap.registerPlugin(ScrollToPlugin);
+
+// // Components
+// import { Navbar } from "./components/navbar.jsx";
+// import MagicBento from "./components/magicbento.jsx";
+// import DarkVeil from "./components/darkveil.jsx";
+// import LaserFlow from "./components/laserflow.jsx";
+// import TextType from "./components/texttype.jsx";
+// import DecryptedText from "./components/decryptedtext.jsx";
+// import SplineScene from "./components/splinescene.jsx";
+// import BentoBox from "./components/bentobox.jsx";
+
+// //Hooks
+// import useOnScreen from "./hooks/useOnScreen.js";
+
+// // Assets
+// import HeroImage from "./assets/Hero_Vectra.png";
+// import "./App.css";
+
+// function App() {
+//   const [isAtTop, setIsAtTop] = useState(true);
+//   const [scrollProgress, setScrollProgress] = useState(0);
+
+//   const [isAnimating, setIsAnimating] = useState(false);
+
+//   const scrollContainerRef = useRef(null);
+//   const heroSectionRef = useRef(null);
+//   const bodySectionRef = useRef(null);
+//   const footerSectionRef = useRef(null);
+
+//   const isBodyVisible = !!useOnScreen(
+//     bodySectionRef,
+//     scrollContainerRef,
+//     footerSectionRef
+//   );
+
+//   // GSAP useEffect
+//   useEffect(() => {
+//     const container = scrollContainerRef.current;
+//     if (
+//       !container ||
+//       !heroSectionRef.current ||
+//       !bodySectionRef.current ||
+//       !footerSectionRef.current
+//     )
+//       return;
+
+//     const handleWheel = (event) => {
+//       if (isAnimating) {
+//         event.preventDefault();
+//         return;
+//       }
+//       event.preventDefault();
+
+//       const scrollAmount = event.deltaY;
+//       const currentScroll = container.scrollTop;
+//       const sections = [
+//         heroSectionRef.current,
+//         bodySectionRef.current,
+//         footerSectionRef.current,
+//       ];
+
+//       let currentIndex = sections.findIndex(
+//         (section) =>
+//           currentScroll < section.offsetTop + section.clientHeight / 2
+//       );
+//       if (currentIndex === -1) currentIndex = 0;
+
+//       let targetIndex = currentIndex;
+//       if (scrollAmount > 0 && currentIndex < sections.length - 1) {
+//         targetIndex = currentIndex + 1;
+//       } else if (scrollAmount < 0 && currentIndex > 0) {
+//         targetIndex = currentIndex - 1;
+//       }
+
+//       if (
+//         targetIndex !== currentIndex ||
+//         currentScroll !== sections[targetIndex].offsetTop
+//       ) {
+//         setIsAnimating(true);
+//         gsap.to(container, {
+//           duration: 1.2,
+//           scrollTo: sections[targetIndex].offsetTop,
+//           ease: "power2.inOut",
+//           onComplete: () => {
+//             setIsAnimating(false);
+//           },
+//         });
+//       }
+//     };
+
+//     container.addEventListener("wheel", handleWheel, { passive: false });
+
+//     return () => {
+//       container.removeEventListener("wheel", handleWheel);
+//     };
+//   }, [isAnimating]);
+
+//   useEffect(() => {
+//     const container = scrollContainerRef.current;
+//     if (!container) return;
+
+//     const handleScroll = () => {
+//       const scrollTop = container.scrollTop;
+//       const clientHeight = container.clientHeight;
+
+//       setIsAtTop(scrollTop < 50);
+
+//       const progress = Math.min(scrollTop / clientHeight, 1);
+//       setScrollProgress(progress);
+//     };
+
+//     container.addEventListener("scroll", handleScroll);
+//     handleScroll();
+
+//     return () => {
+//       container.removeEventListener("scroll", handleScroll);
+//     };
+//   }, []);
+//   return (
+//     <>
+//       <div className={`navbar-container ${isAtTop ? "is-at-top" : ""}`}>
+//         <Navbar />
+//       </div>
+//       <div className="background-veil">
+//         <DarkVeil scrollProgress={scrollProgress} />
+//       </div>
+//       <main
+//         className={`scroll-container ${isAtTop ? "is-at-top" : ""}`}
+//         ref={scrollContainerRef}
+//       >
+//         <section className="hero-section" ref={heroSectionRef}>
+//           <div className="hero-content">
+//             <img src={HeroImage} alt="" className="hero-image" />
+//             <div className="hero-text-container">
+//               <TextType
+//                 text={["The future of world is here"]}
+//                 typingSpeed={30}
+//                 pauseDuration={1500}
+//                 showCursor={true}
+//                 cursorCharacter="|"
+//                 className="hero-typed-text"
+//               />
+//               <p className="hero-subtext">
+//                 The future of finance, in your hands. Trade crypto assets with
+//                 advanced speed and security.
+//               </p>
+//             </div>
+//           </div>
+//         </section>
+//         <section className="body-section" ref={bodySectionRef}>
+//           <div className="spline-background">
+//             <SplineScene />
+//           </div>
+//           {/* <BentoBox isVisible={isBodyVisible} /> */}
+//           <div
+//             className={`bento-box-section ${isBodyVisible ? "is-visible" : ""}`}
+//           >
+//             <p className="bento-section-title">
+//               <span>Trade with 390 million users on</span> Vectra
+//             </p>
+//             <div className="bento-box">
+//               <div className="bento-box-container">
+//                 <div className="bento-box-wrap">
+//                   <div className="bento-and-title">
+//                     <div className="bento-box-tv-mc">
+//                       <div className="bento-trading-volume">
+//                         <p className="bento-box-title">24h trading volume</p>
+//                         <p className="bento-box-description"></p>
+//                       </div>
+//                       <div className="bento-market-cap">
+//                         <p className="bento-box-title">Market Cap</p>
+//                         <p className="bento-box-description"></p>
+//                       </div>
+//                     </div>
+//                     {/* <p className='bento-section-title'><span>Trade with 390 million users on </span>Vectra</p> */}
+//                   </div>
+//                   <div className="bento-news">
+//                     <p className="bento-box-title">News</p>
+//                     <p className="bento-box-description"></p>
+//                   </div>
+//                 </div>
+//                 <div className="bento-popular">
+//                   <p className="bento-box-title">Most Popular</p>
+//                   <p className="bento-box-description"></p>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </section>
+//         <section className="footer-section" ref={footerSectionRef}>
+//           {/* <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }}>
+//             <LaserFlow />
+//           </div> */}
+//           <p>© 2025 Vectra. All rights reserved.</p>
+//         </section>
+//       </main>
+//     </>
+//   );
+// }
+
+import React, { useState, useEffect, useRef } from "react";
+import { Routes, Route } from "react-router-dom";
 
 // GSAP
-import { gsap } from 'gsap';
-import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { gsap } from "gsap";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 gsap.registerPlugin(ScrollToPlugin);
 
 // Components
-import { Navbar } from './components/navbar.jsx'
-import MagicBento from './components/magicbento.jsx'
-import DarkVeil from './components/darkveil.jsx'
-import LaserFlow from './components/laserflow.jsx'
-import TextType from './components/texttype.jsx'
-import DecryptedText from './components/decryptedtext.jsx'
-import SplineScene from './components/splinescene.jsx'
-import BentoBox from './components/bentobox.jsx'
+import { Navbar } from "./components/navbar.jsx";
+import MagicBento from "./components/magicbento.jsx";
+import DarkVeil from "./components/darkveil.jsx";
+import LaserFlow from "./components/laserflow.jsx";
+import TextType from "./components/texttype.jsx";
+import DecryptedText from "./components/decryptedtext.jsx";
+import SplineScene from "./components/splinescene.jsx";
+import BentoBox from "./components/bentobox.jsx";
 
 //Hooks
-import useOnScreen from './hooks/useOnScreen.js'
+import useOnScreen from "./hooks/useOnScreen.js";
 
 // Assets
-import HeroImage from './assets/Hero_Vectra.png'
-import './App.css'
+import HeroImage from "./assets/Hero_Vectra.png";
+import "./App.css";
 
+// App code neh
 function App() {
   const [isAtTop, setIsAtTop] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
-
-  const [isAnimating, setIsAnimating] = useState(false); 
+  const [isAnimating, setIsAnimating] = useState(false);
 
   const scrollContainerRef = useRef(null);
-  const heroSectionRef = useRef(null); 
+  const heroSectionRef = useRef(null);
   const bodySectionRef = useRef(null);
   const footerSectionRef = useRef(null);
 
-  const isBodyVisible = !!useOnScreen(bodySectionRef, scrollContainerRef, footerSectionRef);
+  const isBodyVisible = !!useOnScreen(
+    bodySectionRef,
+    scrollContainerRef,
+    footerSectionRef
+  );
 
-  // GSAP useEffect
   useEffect(() => {
     const container = scrollContainerRef.current;
-    if (!container || !heroSectionRef.current || !bodySectionRef.current || !footerSectionRef.current) return;
+    if (
+      !container ||
+      !heroSectionRef.current ||
+      !bodySectionRef.current ||
+      !footerSectionRef.current
+    )
+      return;
 
     const handleWheel = (event) => {
       if (isAnimating) {
@@ -47,132 +263,238 @@ function App() {
         return;
       }
       event.preventDefault();
-
       const scrollAmount = event.deltaY;
       const currentScroll = container.scrollTop;
-      const sections = [heroSectionRef.current, bodySectionRef.current, footerSectionRef.current];
-      
-      let currentIndex = sections.findIndex(section => currentScroll < section.offsetTop + section.clientHeight / 2);
+      const sections = [
+        heroSectionRef.current,
+        bodySectionRef.current,
+        footerSectionRef.current,
+      ];
+      let currentIndex = sections.findIndex(
+        (section) =>
+          currentScroll < section.offsetTop + section.clientHeight / 2
+      );
       if (currentIndex === -1) currentIndex = 0;
-
       let targetIndex = currentIndex;
       if (scrollAmount > 0 && currentIndex < sections.length - 1) {
         targetIndex = currentIndex + 1;
       } else if (scrollAmount < 0 && currentIndex > 0) {
         targetIndex = currentIndex - 1;
       }
-
-      if (targetIndex !== currentIndex || currentScroll !== sections[targetIndex].offsetTop) {
+      if (
+        targetIndex !== currentIndex ||
+        currentScroll !== sections[targetIndex].offsetTop
+      ) {
         setIsAnimating(true);
         gsap.to(container, {
           duration: 1.2,
           scrollTo: sections[targetIndex].offsetTop,
-          ease: 'power2.inOut',
+          ease: "power2.inOut",
           onComplete: () => {
             setIsAnimating(false);
-          }
+          },
         });
       }
     };
-    
-    container.addEventListener('wheel', handleWheel, { passive: false });
-
+    container.addEventListener("wheel", handleWheel, { passive: false });
     return () => {
-      container.removeEventListener('wheel', handleWheel);
+      container.removeEventListener("wheel", handleWheel);
     };
   }, [isAnimating]);
 
   useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
-
     const handleScroll = () => {
       const scrollTop = container.scrollTop;
       const clientHeight = container.clientHeight;
-
       setIsAtTop(scrollTop < 50);
-
       const progress = Math.min(scrollTop / clientHeight, 1);
       setScrollProgress(progress);
     };
-
-    container.addEventListener('scroll', handleScroll);
+    container.addEventListener("scroll", handleScroll);
     handleScroll();
-
     return () => {
-      container.removeEventListener('scroll', handleScroll);
+      container.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   return (
     <>
-      <div className={`navbar-container ${isAtTop ? 'is-at-top' : ''}`}>
-      <Navbar />
+      <div className={`navbar-container ${isAtTop ? "is-at-top" : ""}`}>
+        <Navbar />
       </div>
-      <div className='background-veil'>
+      <div className="background-veil">
         <DarkVeil scrollProgress={scrollProgress} />
       </div>
-      <main className={`scroll-container ${isAtTop ? 'is-at-top' : ''}`} ref={scrollContainerRef}>
-        <section className='hero-section' ref={heroSectionRef}>
-          <div className='hero-content'>
-            <img src={HeroImage} alt="" className='hero-image'/>
-            <div className='hero-text-container'>
-            <TextType 
-              text={["The future of world is here"]}
-              typingSpeed={30}
-              pauseDuration={1500}
-              showCursor={true}
-              cursorCharacter="|"
-              className='hero-typed-text'
-            />
-            <p className='hero-subtext'>The future of finance, in your hands. Trade crypto assets with advanced speed and security.</p>
-            </div>
+      <main
+        className={`scroll-container ${isAtTop ? "is-at-top" : ""}`}
+        ref={scrollContainerRef}
+      >
+        <section className="hero-section" ref={heroSectionRef}>
+          <div className="hero-content">
+            <img src={HeroImage} alt="" className="hero-image" />{" "}
+            <div className="hero-text-container">
+              {" "}
+              <TextType
+                text={["The future of world is here"]}
+                typingSpeed={30}
+                pauseDuration={1500}
+                showCursor={true}
+                cursorCharacter="|"
+                className="hero-typed-text"
+              />{" "}
+              <p className="hero-subtext">
+                The future of finance, in your hands. Trade crypto assets with
+                advanced speed and security.{" "}
+              </p>{" "}
+            </div>{" "}
           </div>
         </section>
-        <section className='body-section' ref={bodySectionRef}>
-          <div className='spline-background'>
+
+        <section className="body-section" ref={bodySectionRef}>
+          <div className="spline-background">
             <SplineScene />
           </div>
-          {/* <BentoBox isVisible={isBodyVisible} /> */}
-          <div className={`bento-box-section ${isBodyVisible ? 'is-visible' : ''}`}>
-            <p className='bento-section-title'><span>Trade with 390 million users on </span> Vectra</p>
-            <div className='bento-box'>
-              <div className='bento-box-container'>
-                <div className='bento-box-wrap'>
-                  <div className='bento-and-title'>
-                  <div className='bento-box-tv-mc'>
-                    <div className='bento-trading-volume'>
-                      <p className='bento-box-title'>24h trading volume</p>
-                      <p className='bento-box-description'></p>
+
+          {/* BentoBox */}
+          <BentoBox>
+            {/* nerima data */}
+            {({ loading, error, globalData, trendingData, formatCurrency }) => (
+              /* layout App.jsx */
+              <div
+                className={`bento-box-section ${
+                  isBodyVisible ? "is-visible" : ""
+                }`}
+              >
+                <p className="bento-section-title">
+                  <span>Trade with 390 million users on</span> Vectra
+                </p>
+                <div className="bento-box">
+                  <div className="bento-box-container">
+                    <div className="bento-box-wrap">
+                      <div className="bento-and-title">
+                        <div className="bento-box-tv-mc">
+                          <div className="bento-trading-volume">
+                            <p className="bento-box-title">
+                              24h trading volume
+                            </p>
+                            {/*isi data*/}
+                            <p className="bento-box-description text-3xl font-bold mt-2">
+                              {loading && "Memuat..."}
+                              {error && "Error"}
+                              {globalData &&
+                                formatCurrency(globalData.total_volume.usd)}
+                            </p>
+                          </div>
+                          <div className="bento-market-cap">
+                            <p className="bento-box-title">Market Cap</p>
+                            {/* isi data*/}
+                            <p className="bento-box-description text-3xl font-bold mt-2">
+                              {loading && "Memuat..."}
+                              {error && "Error"}
+                              {globalData &&
+                                formatCurrency(globalData.total_market_cap.usd)}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <div className="bento-news">
+                        <p className="bento-box-title">News (Top 3)</p>
+                        <div className="bento-box-description text-gray-300 mt-2 w-full text-left overflow-y-auto h-[120px] pr-2">
+                          {loading && "Memuat berita..."}
+
+                          {error && !newsData.length && (
+                            <p className="text-red-400 text-sm">{error}</p>
+                          )}
+
+                          {!loading && newsData.length > 0 && (
+                            <ul className="space-y-2">
+                              {newsData.map((article) => (
+                                <li key={article.url} className="text-sm">
+                                  <a
+                                    href={article.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="font-semibold hover:underline"
+                                    title={article.title}
+                                  >
+                                    {article.title.substring(0, 60)}...
+                                  </a>
+                                  <p className="text-xs text-gray-400">
+                                    {article.source.name}
+                                  </p>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
+
+                          {!loading && !error && newsData.length === 0 && (
+                            <p className="text-gray-400">
+                              Tidak ada berita terbaru.
+                            </p>
+                          )}
+                        </div>
+                      </div> */}
+                      <div className="bento-news">
+                        <p className="bento-box-title">News</p>
+                        <p className="bento-box-description text-gray-300 mt-2">
+                          {loading && "Memuat..."}
+                          {/* isi data*/}
+                          <p className="bento-box-description text-3xl font-bold mt-2">
+                            {loading && "Memuat..."}
+                            {error && "Error"}
+                            {globalData &&
+                              formatCurrency(globalData.total_market_cap.usd)}
+                          </p>
+                        </p>
+                      </div>
                     </div>
-                    <div className='bento-market-cap'>
-                      <p className='bento-box-title'>Market Cap</p>
-                      <p className='bento-box-description'></p>
+                    <div className="bento-popular">
+                      <p className="bento-box-title">Most Popular</p>
+                      {/* isidata */}
+                      <div className="bento-box-description w-full mt-4 overflow-y-auto h-[500px]">
+                        {loading && "Memuat..."}
+                        {error && (
+                          <p className="text-red-400">Error: {error}</p>
+                        )}
+                        {trendingData.length > 0 && (
+                          <ul className="space-y-3">
+                            {trendingData.slice(0, 7).map((coin) => (
+                              <li
+                                key={coin.item.id}
+                                className="flex items-center p-1 rounded-lg"
+                              >
+                                <img
+                                  src={coin.item.small}
+                                  alt={coin.item.name}
+                                  className="w-8 h-8 mr-3 rounded-full"
+                                />
+                                <span className="font-semibold">
+                                  {coin.item.name}
+                                </span>
+                                <span className="ml-auto text-gray-300 font-['Audiowide'] uppercase">
+                                  {coin.item.symbol}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
                     </div>
                   </div>
-                  {/* <p className='bento-section-title'><span>Trade with 390 million users on </span>Vectra</p> */}
-                  </div>
-                  <div className='bento-news'>
-                    <p className='bento-box-title'>News</p>
-                    <p className='bento-box-description'></p>
-                  </div>
-                </div>
-                <div className='bento-popular'>
-                  <p className='bento-box-title'>Most Popular</p>
-                  <p className='bento-box-description'></p>
                 </div>
               </div>
-            </div>
-          </div>
+            )}
+          </BentoBox>
+          {/* akhir bentobox */}
         </section>
-        <section className='footer-section' ref={footerSectionRef}>
-          {/* <div style={{ height: '500px', position: 'relative', overflow: 'hidden' }}>
-            <LaserFlow />
-          </div> */}
+        <section className="footer-section" ref={footerSectionRef}>
           <p>© 2025 Vectra. All rights reserved.</p>
         </section>
       </main>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
