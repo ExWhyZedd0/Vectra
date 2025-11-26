@@ -325,7 +325,7 @@ function App() {
         <Navbar />
       </div>
       <div className="background-veil">
-        <DarkVeil scrollProgress={scrollProgress} />
+        {/* <DarkVeil scrollProgress={scrollProgress} /> */}
       </div>
       <main
         className={`scroll-container ${isAtTop ? "is-at-top" : ""}`}
@@ -354,7 +354,7 @@ function App() {
 
         <section className="body-section" ref={bodySectionRef}>
           <div className="spline-background">
-            <SplineScene />
+            {/* <SplineScene /> */}
           </div>
 
           {/* BentoBox */}
