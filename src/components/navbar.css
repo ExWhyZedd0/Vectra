@@ -39,6 +39,12 @@ nav {
   opacity: 1;
 }
 
+nav .logo-menu{
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
 nav .title {
   display: flex;
   align-items: center;
@@ -57,10 +63,12 @@ nav .title p {
 nav .logo {
   height: px;
 }
+
 nav .title span{
   font-family: 'Audiowide', cursive;
   color: #00FFA3;
 }
+
 nav ul {
   display: flex;
   list-style: none;
