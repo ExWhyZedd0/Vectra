@@ -1,9 +1,12 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
 
-// Pages
+// Pages - Pastikan semua file ini ADA di folder src/pages/
 import Home from './pages/Home.jsx';
 import MarketPage from './pages/MarketPage.jsx';
+import AboutUs from './pages/AboutUs.jsx'; // Ini yang tadi error
+import News from './pages/News.jsx';
+import FAQ from './pages/FAQ.jsx';
 
 // CSS Utama
 import './App.css'
@@ -13,9 +16,9 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/market" element={<MarketPage />} />
-      
-      {/* Tambahkan route lain di sini nanti, misal: */}
-      {/* <Route path="/news" element={<NewsPage />} /> */}
+      <Route path="/news" element={<News />} />
+      <Route path="/faq" element={<FAQ />} />
+      <Route path="/about-us" element={<AboutUs />} />
     </Routes>
   )
 }
