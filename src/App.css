@@ -245,7 +245,7 @@ html, body {
 }
 
 .body-section * {
-  border: #efefef 1px solid;
+  /* border: #efefef 1px solid; */
 }
 
 .scroll-container.is-at-top .body-section {
@@ -258,198 +258,7 @@ html, body {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-}
-
-.bento-box-section {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  z-index: 2;
-  transform: translateY(50px);
-  transition: opacity 1s ease-out, transform 1s ease-out;
-  padding-left: 128px;
-  padding-right: 128px;
-  padding-top: 32px;
-  padding-bottom: 32px
-}
-
-.bento-box-section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.bento-box-section.is-visible .bento-section-title {
-  animation: slide-in-down 1.5s ease-in-out forwards;
-  opacity: 1;
-}
-
-.bento-box-section.is-visible .bento-trading-volume {
-  animation: slide-in-left 1.5s ease-in-out  forwards;
-  opacity: 1;
-}
-
-.bento-box-section.is-visible .bento-market-cap {
-  animation: slide-in-left 1.5s ease-in-out 0.2s forwards;
-  opacity: 1;
-}
-
-.bento-box-section.is-visible .bento-popular {
-  animation: slide-in-right 1.5s ease-in-out 0.2s forwards;
-  opacity: 1;
-}
-
-.bento-box-section.is-visible .bento-news {
-  animation: slide-in-up 1.5s ease-in-out 0.4s forwards;
-  opacity: 1;
-}
-
-.bento-section-title {
-  width: fit-content;
-  height: fit-content;
-  padding: 16px;
-  justify-content: center;
-  font-size: 48px;
-  margin-bottom: 32px;
-  font-weight: 500;
-  font-family: 'Audiowide', cursive;
-  opacity: 0;
-}
-
-.bento-section-title span{
-  width: fit-content;
-  height: fit-content;
-  justify-content: center;
-  font-size: 48px;
- font-family: 'Fredoka', sans-serif;
-}
-
-.bento-box {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.bento-box-container{
-  width: fit-content;
-  height: fit-content;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center
-}
-
-.bento-box-wrap {
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-}
-
-.bento-box-tv-mc {
-  height: fit-content;
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-}
-
-.bento-and-title {
-  height: fit-content;
-  width: fit-content;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-}
-
-.bento-trading-volume {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  padding: 24px;
-  color: #efefef;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: 'Fredoka', sans-serif;
-  width: 280px;
-  height: 180px;
-  margin: 12px;
-  opacity: 0;
-}
-
-.bento-market-cap {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  padding: 24px;
-  color: #efefef;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: 'Fredoka', sans-serif;
-  width: 280px;
-  height: 180px;
-  margin: 12px;
-  opacity: 0;
-}
-
-.bento-popular {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  padding: 24px;
-  color: #efefef;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: 'Fredoka', sans-serif;
-  width: 280px;
-  height: 588px;
-  margin: 12px;
-  opacity: 0;
-}
-
-.bento-news {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  border-radius: 16px;
-  padding: 24px;
-  color: #efefef;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  font-family: 'Fredoka', sans-serif;
-  width: 912px;
-  height: 180px;
-  margin: 12px;
-  opacity: 0;
+  z-index: -1;
 }
 
 /* Footer-Section */
@@ -473,6 +282,10 @@ html, body {
 
   .hero-subtext{
     font-size: 20px;
+  }
+
+  .spline-background{
+    display: none;
   }
 
 }
@@ -516,6 +329,6 @@ html, body {
     font-family: 'Fredoka', sans-serif;
   }
 
-
+  
 
 }

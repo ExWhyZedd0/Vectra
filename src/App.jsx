@@ -132,36 +132,8 @@ function App() {
           <div className='spline-background'>
             <SplineScene />
           </div>
-          {/* <BentoBox isVisible={isBodyVisible} /> */}
-          <div className={`bento-box-section ${isBodyVisible ? 'is-visible' : ''}`}>
-            <p className='bento-section-title'><span>Trade with 390 million users on </span> Vectra</p>
-            <div className='bento-box'>
-              <div className='bento-box-container'>
-                <div className='bento-box-wrap'>
-                  <div className='bento-and-title'>
-                  <div className='bento-box-tv-mc'>
-                    <div className='bento-trading-volume'>
-                      <p className='bento-box-title'>24h trading volume</p>
-                      <p className='bento-box-description'></p>
-                    </div>
-                    <div className='bento-market-cap'>
-                      <p className='bento-box-title'>Market Cap</p>
-                      <p className='bento-box-description'></p>
-                    </div>
-                  </div>
-                  {/* <p className='bento-section-title'><span>Trade with 390 million users on </span>Vectra</p> */}
-                  </div>
-                  <div className='bento-news'>
-                    <p className='bento-box-title'>News</p>
-                    <p className='bento-box-description'></p>
-                  </div>
-                </div>
-                <div className='bento-popular'>
-                  <p className='bento-box-title'>Most Popular</p>
-                  <p className='bento-box-description'></p>
-                </div>
-              </div>
-            </div>
+          <div className="relative z-10 w-full flex items-center justify-center min-h-screen py-20">
+           <BentoBox isVisible={isBodyVisible} />
           </div>
         </section>
         <section className='footer-section' ref={footerSectionRef}>
