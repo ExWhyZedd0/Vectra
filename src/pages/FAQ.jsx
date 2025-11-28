@@ -10,7 +10,7 @@ const FAQ = () => {
         </div>
       </div>
 
-      <div className="w-full max-w-4xl mx-auto pt-32 pb-20 px-4 md:px-8">
+      <div className="w-full max-w-4xl mx-auto pt-32 pb-20 px-4 md:px-8" style={{ marginTop: '120px' }}>
         <h1 className="text-4xl md:text-6xl font-['Audiowide'] mb-12 text-center">
           F.A.Q
         </h1>

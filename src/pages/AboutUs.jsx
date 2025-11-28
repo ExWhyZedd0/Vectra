@@ -16,7 +16,7 @@ const AboutUs = () => {
       </div>
 
       {/* Content */}
-      <div className="w-full max-w-7xl mx-auto pt-40 pb-20 px-4 md:px-8">
+      <div className="w-full max-w-7xl mx-auto pt-40 pb-20 px-4 md:px-8" style={{ marginTop: '120px' }}>
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-6xl font-['Audiowide'] mb-6">
             About <span className="text-[#00FFA3]">Vectra</span>
