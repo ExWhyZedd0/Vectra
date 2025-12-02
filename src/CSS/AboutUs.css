@@ -1,0 +1,131 @@
+/* Container Utama */
+.about-page-container {
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto; /* Scroll browser utama */
+  overflow-x: hidden;
+  background-color: #060010;
+  color: white;
+  position: relative;
+}
+
+/* Selection Highlight */
+.about-page-container ::selection {
+  background-color: #00FFA3;
+  color: black;
+}
+
+/* Background Gradient Fixed */
+.about-bg-accent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Gradient radial dari atas */
+  background: radial-gradient(ellipse at top, rgba(0, 255, 163, 0.1), #060010, #060010);
+  z-index: -10;
+  pointer-events: none;
+}
+
+/* Navbar Wrapper Fixed */
+.about-navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+/* Content Wrapper */
+.about-content {
+  width: 100%;
+  max-width: 80rem; /* setara max-w-7xl */
+  margin: 120px auto 0 auto; /* Top 120px, Center Horizontal */
+  padding-bottom: 5rem; /* pb-20 */
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem;
+  box-sizing: border-box;
+}
+
+/* Responsive Padding */
+@media (min-width: 768px) {
+  .about-content {
+    padding-left: 2rem; /* md:px-8 */
+    padding-right: 2rem;
+  }
+}
+
+/* Header Section */
+.about-header {
+  text-align: center;
+  margin-bottom: 4rem; /* mb-16 */
+}
+
+.about-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 2.25rem; /* text-4xl */
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+@media (min-width: 768px) {
+  .about-title {
+    font-size: 3.75rem; /* md:text-6xl */
+  }
+}
+
+.text-highlight {
+  color: #00FFA3;
+}
+
+.about-description {
+  color: #9ca3af; /* text-gray-400 */
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1.125rem; /* text-lg */
+  max-width: 42rem; /* max-w-2xl */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Grid Layout (Mission & Vision) */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Mobile: 1 Kolom */
+  gap: 3rem; /* gap-12 */
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr 1fr; /* Tablet/Desktop: 2 Kolom */
+  }
+}
+
+/* Kartu Misi & Visi */
+.about-card {
+  background-color: rgba(255, 255, 255, 0.05); /* bg-white/5 */
+  backdrop-filter: blur(12px); /* backdrop-blur-md */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* border-white/10 */
+  padding: 2rem; /* p-8 */
+  border-radius: 1rem; /* rounded-2xl */
+  transition: border-color 0.3s ease;
+}
+
+.about-card:hover {
+  border-color: rgba(0, 255, 163, 0.3); /* hover border neon */
+}
+
+.card-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 1.5rem; /* text-2xl */
+  color: #00FFA3;
+  margin-bottom: 1rem; /* mb-4 */
+  margin-top: 0;
+}
+
+.card-text {
+  font-family: 'Fredoka', sans-serif;
+  color: #d1d5db; /* text-gray-300 */
+  line-height: 1.625; /* leading-relaxed */
+  margin: 0;
+}

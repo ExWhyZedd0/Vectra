@@ -1,0 +1,184 @@
+/* Container Utama */
+.table-container {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  padding: 1.5rem; /* Sedikit diperbesar */
+  box-sizing: border-box;
+}
+
+/* === BAGIAN FILTER / SEARCH === */
+.filter-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.table-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 1.5rem;
+  color: white;
+  margin: 0;
+}
+
+/* SEARCH INPUT */
+.search-input {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  font-family: 'Fredoka', sans-serif;
+  width: 100%;
+  min-width: 250px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  border-color: #00FFA3;
+  box-shadow: 0 0 10px rgba(0, 255, 163, 0.2);
+}
+
+/* TOMBOL FILTER (Gainers/Losers) */
+.filter-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.filter-btn {
+  background-color: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #9ca3af;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover {
+  border-color: #00FFA3;
+  color: white;
+}
+
+.filter-btn.active {
+  background-color: rgba(0, 255, 163, 0.2);
+  border-color: #00FFA3;
+  color: #00FFA3;
+  font-weight: bold;
+}
+
+/* Wrapper Tabel agar bisa discroll horizontal */
+.table-scroll-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  /* Scrollbar custom untuk Webkit (Chrome/Safari) */
+  scrollbar-width: thin;
+  scrollbar-color: #00FFA3 rgba(255, 255, 255, 0.05);
+}
+
+.table-scroll-wrapper::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.table-scroll-wrapper::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.table-scroll-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 255, 163, 0.3);
+  border-radius: 4px;
+}
+
+/* Tabel */
+.market-table {
+  width: 100%;
+  border-collapse: separate; /* Penting untuk sticky header */
+  border-spacing: 0;
+  color: white;
+  min-width: 600px;
+}
+
+.market-table thead th {
+  text-align: left;
+  padding: 1rem;
+  font-family: 'Audiowide', cursive;
+  color: #00FFA3;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+}
+
+.market-table tbody tr {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+.market-table tbody tr:hover {
+  background-color: rgba(0, 255, 163, 0.05);
+}
+
+.market-table tbody td {
+  padding: 1rem;
+  font-family: 'Fredoka', sans-serif;
+  vertical-align: middle;
+}
+
+/* Komponen Kecil (Koin, Warna, Loading) */
+.coin-info { display: flex; align-items: center; gap: 0.75rem; }
+.coin-image { width: 32px; height: 32px; border-radius: 50%; }
+.coin-name { font-weight: bold; display: block; }
+.coin-symbol { font-size: 0.8rem; color: #9ca3af; text-transform: uppercase; }
+.percent-change { font-weight: 600; }
+.positive { color: #00FFA3; }
+.negative { color: #f87171; }
+.loading-message { text-align: center; padding: 2rem; color: #9ca3af; font-family: 'Audiowide', cursive; }
+
+/* === PAGINATION CONTROLS === */
+.pagination-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem; /* Jarak antar tombol */
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pagination-btn {
+  background-color: rgba(0, 255, 163, 0.1);
+  border: 1px solid #00FFA3;
+  color: #00FFA3;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-family: 'Audiowide', cursive;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 40px; /* Agar tombol << tidak kekecilan */
+}
+
+.pagination-btn:hover:not(:disabled) {
+  background-color: #00FFA3;
+  color: black;
+  box-shadow: 0 0 10px rgba(0, 255, 163, 0.4);
+}
+
+.pagination-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  border-color: #6b7280;
+  color: #6b7280;
+  background-color: transparent;
+}

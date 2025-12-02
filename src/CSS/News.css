@@ -1,0 +1,131 @@
+/* Container Utama */
+.news-page-container {
+  height: 100vh;
+  width: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background-color: #060010;
+  color: white;
+  position: relatived;
+}
+
+/* Selection Color (Highlight Teks) */
+.news-page-container ::selection {
+  background-color: #00FFA3;
+  color: black;
+}
+
+/* Navbar Wrapper Fixed */
+.news-navbar-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+}
+
+/* Content Wrapper */
+/* Mengatur agar konten di tengah horizontal & turun dari navbar */
+.news-content {
+  width: 100%;
+  max-width: 80rem; /* setara max-w-7xl */
+  margin: 120px auto 0 auto; /* Top 120px, Auto kiri-kanan */
+  padding-bottom: 5rem; /* pb-20 */
+  padding-left: 1rem; /* px-4 */
+  padding-right: 1rem;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Responsive Padding */
+@media (min-width: 768px) {
+  .news-content {
+    padding-left: 2rem; /* md:px-8 */
+    padding-right: 2rem;
+  }
+}
+
+/* Typography */
+.news-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 2.25rem; /* text-4xl */
+  margin-bottom: 1.5rem; /* mb-6 */
+}
+
+@media (min-width: 768px) {
+  .news-title {
+    font-size: 3.75rem; /* md:text-6xl */
+  }
+}
+
+.news-accent {
+  color: #00FFA3;
+}
+
+.news-subtitle {
+  color: #9ca3af; /* text-gray-400 */
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1rem;
+}
+
+/* Grid Layout untuk Kartu Berita */
+.news-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* Default 1 kolom (Mobile) */
+  gap: 1.5rem; /* gap-6 */
+  margin-top: 3rem; /* mt-12 */
+}
+
+@media (min-width: 768px) {
+  .news-grid {
+    grid-template-columns: repeat(3, 1fr); /* md:grid-cols-3 (Desktop) */
+  }
+}
+
+/* Styling Kartu Berita */
+.news-card {
+  background-color: rgba(255, 255, 255, 0.05); /* bg-white/5 */
+  border: 1px solid rgba(255, 255, 255, 0.1); /* border-white/10 */
+  padding: 1.5rem; /* p-6 */
+  border-radius: 1rem; /* rounded-2xl */
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.news-card:hover {
+  border-color: rgba(0, 255, 163, 0.5); /* hover:border-[#00FFA3]/50 */
+}
+
+/* Skeleton Image Placeholder */
+.news-image-placeholder {
+  height: 10rem; /* h-40 */
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1); /* bg-white/10 */
+  border-radius: 0.75rem; /* rounded-xl */
+  margin-bottom: 1rem; /* mb-4 */
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Animasi Pulse Tailwind (Manual CSS) */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: .5;
+  }
+}
+
+/* Typography di dalam Kartu */
+.news-card-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 1.25rem; /* text-xl */
+  margin-bottom: 0.5rem; /* mb-2 */
+}
+
+.news-card-desc {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.875rem; /* text-sm */
+  color: #9ca3af; /* text-gray-400 */
+}

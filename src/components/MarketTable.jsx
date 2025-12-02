@@ -1,109 +1,203 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import '../CSS/MarketTable.css'; // Pastikan path CSS ini benar
 
 const MarketTable = () => {
-  const [filter, setFilter] = useState('all');
+  const [coins, setCoins] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // State untuk Error
+  
+  const [search, setSearch] = useState('');
+  const [sortType, setSortType] = useState('default'); 
+  
+  // Ref untuk mencegah double-fetch di React 18 Strict Mode
+  const hasFetched = useRef(false);
 
-  // Data Dummy yang lebih lengkap
-  const marketData = [
-    { rank: 1, code: 'BTC', name: 'Bitcoin', price: '$64,230.50', change: '+2.4%', cap: '$1.2T', vol: '$35B', isUp: true },
-    { rank: 2, code: 'ETH', name: 'Ethereum', price: '$3,450.12', change: '+1.8%', cap: '$405B', vol: '$15B', isUp: true },
-    { rank: 3, code: 'SOL', name: 'Solana', price: '$145.60', change: '+5.2%', cap: '$65B', vol: '$4.2B', isUp: true },
-    { rank: 4, code: 'VCT', name: 'Vectra', price: '$12.45', change: '+12.5%', cap: '$800M', vol: '$120M', isUp: true },
-    { rank: 5, code: 'XRP', name: 'Ripple', price: '$0.62', change: '+0.9%', cap: '$34B', vol: '$1.1B', isUp: true },
-    { rank: 6, code: 'ADA', name: 'Cardano', price: '$0.45', change: '-0.4%', cap: '$16B', vol: '$400M', isUp: false },
-    { rank: 7, code: 'DOGE', name: 'Dogecoin', price: '$0.16', change: '+8.1%', cap: '$23B', vol: '$2.5B', isUp: true },
-    { rank: 8, code: 'DOT', name: 'Polkadot', price: '$7.20', change: '-1.2%', cap: '$10B', vol: '$200M', isUp: false },
-    { rank: 9, code: 'LINK', name: 'Chainlink', price: '$18.50', change: '+3.4%', cap: '$11B', vol: '$500M', isUp: true },
-    { rank: 10, code: 'MATIC', name: 'Polygon', price: '$0.98', change: '+1.1%', cap: '$9B', vol: '$300M', isUp: true },
-    { rank: 11, code: 'AVAX', name: 'Avalanche', price: '$45.30', change: '-2.5%', cap: '$17B', vol: '$600M', isUp: false },
-    { rank: 12, code: 'SHIB', name: 'Shiba Inu', price: '$0.000027', change: '-1.5%', cap: '$15B', vol: '$800M', isUp: false },
-  ];
+  useEffect(() => {
+    if (hasFetched.current) return;
+    hasFetched.current = true;
 
-  // Logic Filter Sederhana
-  const filteredData = marketData.filter(coin => {
-    if (filter === 'gainers') return coin.isUp;
-    if (filter === 'losers') return !coin.isUp;
-    return true;
-  });
+    const fetchIncremental = async () => {
+      setLoading(true);
+      setError(null);
+      
+      const pages = [1, 2, 3, 4]; // Kita mau ambil 4 halaman (1000 koin)
+      let allFetchedCoins = [];
 
-  const tableHeaderStyle = "text-gray-400 font-['Fredoka'] text-sm pb-4";
+      try {
+        for (const page of pages) {
+          // 1. Fetch data per halaman
+          const response = await fetch(
+            `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=${page}&sparkline=false`
+          );
+
+          // 2. Cek jika kena Rate Limit (429)
+          if (response.status === 429) {
+            throw new Error("API Rate Limit Hit! (Too many requests). Please wait 1 minute.");
+          }
+          
+          if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+          }
+
+          const data = await response.json();
+          
+          // 3. Tambahkan data ke array sementara & Update State LANGSUNG
+          // Ini membuat user melihat data bertambah (250.. 500.. 750..)
+          allFetchedCoins = [...allFetchedCoins, ...data];
+          setCoins(prevCoins => [...prevCoins, ...data]);
+
+          // 4. Delay kecil (1 detik) agar API tidak marah
+          await new Promise(resolve => setTimeout(resolve, 1500));
+        }
+      } catch (err) {
+        console.error("Fetch error:", err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchIncremental();
+  }, []);
+
+  // Logic Filter
+  let filteredData = coins.filter(coin => 
+    coin.name.toLowerCase().includes(search.toLowerCase()) || 
+    coin.symbol.toLowerCase().includes(search.toLowerCase())
+  );
+
+  // Logic Sort
+  if (sortType === 'gainers') {
+    filteredData.sort((a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h);
+  } else if (sortType === 'losers') {
+    filteredData.sort((a, b) => a.price_change_percentage_24h - b.price_change_percentage_24h);
+  } 
+
+  const formatCurrency = (number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(number);
+  };
 
   return (
-    <div className="w-full max-w-7xl mx-auto">
+    <div className="table-container">
       
-      {/* FILTER TABS */}
-      <div className="flex gap-4 mb-8 font-['Audiowide']">
-        {['all', 'gainers', 'losers'].map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setFilter(tab)}
-            className={`px-6 py-2 rounded-full border transition-all duration-300 ${
-              filter === tab 
-              ? 'bg-[#00FFA3] text-black border-[#00FFA3] shadow-[0_0_15px_rgba(0,255,163,0.5)]' 
-              : 'bg-transparent text-white border-white/20 hover:border-[#00FFA3] hover:text-[#00FFA3]'
-            }`}
-          >
-            {tab.charAt(0).toUpperCase() + tab.slice(1)}
-          </button>
-        ))}
-      </div>
+      {/* HEADER */}
+      <div className="filter-header">
+        <div className="header-left">
+          <h2 className="table-title">Market Data</h2>
+          <span className="page-info" style={{fontSize: '0.8rem'}}>
+            Loaded: {coins.length} / 1000 Assets
+          </span>
+        </div>
 
-      {/* TABLE HEADER (Hidden on mobile) */}
-      <div className="hidden md:grid grid-cols-12 px-6 mb-2">
-        <div className={`${tableHeaderStyle} col-span-1`}>#</div>
-        <div className={`${tableHeaderStyle} col-span-3`}>Name</div>
-        <div className={`${tableHeaderStyle} col-span-2 text-right`}>Price</div>
-        <div className={`${tableHeaderStyle} col-span-2 text-right`}>24h Change</div>
-        <div className={`${tableHeaderStyle} col-span-2 text-right`}>Market Cap</div>
-        <div className={`${tableHeaderStyle} col-span-2 text-right`}>Volume</div>
-      </div>
-
-      {/* COIN LIST */}
-      <div className="flex flex-col gap-3">
-        {filteredData.map((coin) => (
-          <div 
-            key={coin.rank}
-            className="group grid grid-cols-2 md:grid-cols-12 items-center bg-white/5 backdrop-blur-md border border-white/10 rounded-xl p-4 md:px-6 md:py-5 hover:bg-white/10 hover:border-[#00FFA3]/30 hover:scale-[1.01] transition-all duration-300 cursor-pointer"
-          >
-            {/* RANK */}
-            <div className="hidden md:block col-span-1 text-gray-500 font-['Audiowide'] group-hover:text-white transition-colors">
-              {coin.rank}
-            </div>
-
-            {/* NAME */}
-            <div className="col-span-3 flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-gray-700 to-gray-600 flex items-center justify-center font-bold text-xs text-white">
-                {coin.code[0]}
-              </div>
-              <div className="flex flex-col md:flex-row md:items-center md:gap-2">
-                <span className="text-white font-['Audiowide'] text-lg">{coin.code}</span>
-                <span className="text-gray-400 text-xs md:text-sm font-['Fredoka']">{coin.name}</span>
-              </div>
-            </div>
-
-            {/* PRICE */}
-            <div className="col-span-2 text-right font-['Audiowide'] text-white md:text-base text-lg">
-              {coin.price}
-            </div>
-
-            {/* CHANGE (Mobile: Hidden if needed, but important) */}
-            <div className={`col-span-2 text-right font-['Fredoka'] font-medium ${coin.isUp ? 'text-[#00FFA3]' : 'text-red-500'}`}>
-              {coin.change}
-            </div>
-
-            {/* MARKET CAP (Hidden on Mobile) */}
-            <div className="hidden md:block col-span-2 text-right text-white/80 font-['Fredoka']">
-              {coin.cap}
-            </div>
-
-             {/* VOLUME (Hidden on Mobile) */}
-             <div className="hidden md:block col-span-2 text-right text-white/80 font-['Fredoka']">
-              {coin.vol}
-            </div>
-
+        <div className="header-right" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+          <div className="filter-group">
+            <button 
+              className={`filter-btn ${sortType === 'default' ? 'active' : ''}`} 
+              onClick={() => setSortType('default')}
+            >
+              Market Cap
+            </button>
+            <button 
+              className={`filter-btn ${sortType === 'gainers' ? 'active' : ''}`} 
+              onClick={() => setSortType('gainers')}
+            >
+              🔥 Gainers
+            </button>
+            <button 
+              className={`filter-btn ${sortType === 'losers' ? 'active' : ''}`} 
+              onClick={() => setSortType('losers')}
+            >
+              ❄️ Losers
+            </button>
           </div>
-        ))}
+
+          <input 
+            type="text" 
+            placeholder="Search..." 
+            className="search-input"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
       </div>
+
+      {/* ERROR MESSAGE DISPLAY */}
+      {error && (
+        <div style={{ 
+          backgroundColor: 'rgba(239, 68, 68, 0.2)', 
+          border: '1px solid #ef4444', 
+          color: '#fca5a5', 
+          padding: '1rem', 
+          borderRadius: '0.5rem', 
+          marginBottom: '1rem',
+          textAlign: 'center'
+        }}>
+          ⚠️ {error} <br/>
+          <small>Showing {coins.length} coins loaded before error.</small>
+        </div>
+      )}
+
+      {/* TABLE */}
+      <div className="table-scroll-wrapper">
+        <table className="market-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Coin</th>
+              <th>Price</th>
+              <th>24h Change</th>
+              <th>Market Cap</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredData.length > 0 ? (
+              filteredData.map((coin, index) => (
+                <tr key={`${coin.id}-${index}`}>
+                  <td style={{ color: '#9ca3af' }}>{coin.market_cap_rank}</td>
+                  <td>
+                    <div className="coin-info">
+                      <img src={coin.image} alt={coin.name} className="coin-image" loading="lazy" />
+                      <div>
+                        <span className="coin-name">{coin.name}</span>
+                        <span className="coin-symbol">{coin.symbol}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>{formatCurrency(coin.current_price)}</td>
+                  <td className={`percent-change ${coin.price_change_percentage_24h > 0 ? 'positive' : 'negative'}`}>
+                    {coin.price_change_percentage_24h?.toFixed(2)}%
+                  </td>
+                  <td>{formatCurrency(coin.market_cap)}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="5" style={{ textAlign: 'center', padding: '3rem', color: '#9ca3af' }}>
+                  {loading ? (
+                    <div className="loading-message">
+                      Fetching Assets... ({coins.length}/1000)
+                    </div>
+                  ) : (
+                    "No coins found matching your search."
+                  )}
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+      
+      {/* FOOTER STATUS */}
+      <div style={{textAlign: 'center', marginTop: '1rem', color: '#555', fontSize: '0.8rem', paddingBottom: '2rem'}}>
+        {loading 
+          ? `Loading data... (${coins.length} fetched)` 
+          : `Showing ${filteredData.length} assets.`
+        }
+      </div>
+
     </div>
   );
 };
