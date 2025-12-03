@@ -2,7 +2,7 @@ import React from 'react';
 import { Navbar } from '../components/navbar';
 import MarketTable from '../components/MarketTable';
 
-// IMPORT FILE CSS DISINI
+//CSS
 import '../CSS/MarketPage.css'; 
 
 const MarketPage = () => {
