@@ -1,156 +1,127 @@
-/* Navbar Section */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.6;;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-nav {
+/* Container Utama Navbar */
+.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  color: #efefef;
-  font-family: "Fredoka", sans-serif;
+  padding: 1.5rem 2rem; /* Spacing standar */
   width: 100%;
-  padding: 4px 32px;
-  z-index: 99;
-  
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  
-  transform: translateY(-100%);
-  opacity: 0;
-  transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 100;
 }
 
-.navbar-container:hover nav {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-.navbar-container.is-at-top nav {
-  transform: translateY(0);
-  opacity: 1;
-}
-
-nav .logo-menu{
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-nav .title {
-  display: flex;
-  align-items: center;
-  font-size: 32px;
+/* Logo */
+.nav-logo {
+  font-family: 'Audiowide', cursive;
+  font-size: 1.5rem;
+  color: white;
   text-decoration: none;
-  font-family: 'Audiowide', cursive;
-  color: #00FFA3;
-  gap: 4px;
+  z-index: 101; /* Agar tetap di atas saat sidebar muncul */
 }
 
-nav .title p {
-  font-family: 'Audiowide', cursive;
-  color: #efefef;
-}
-
-nav .logo {
-  height: px;
-}
-
-nav .title span{
-  font-family: 'Audiowide', cursive;
+.nav-logo span {
   color: #00FFA3;
 }
 
-nav ul {
+/* === DESKTOP MENU === */
+.nav-links {
   display: flex;
+  gap: 2rem;
+  align-items: center;
   list-style: none;
-  gap: 32px;
-  margin: 0;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #9ca3af; /* Gray-400 */
+  font-family: 'Fredoka', sans-serif;
+  font-size: 1rem;
+  transition: color 0.3s ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: #00FFA3; /* Neon Green */
+}
+
+/* Tombol Hamburger & Close (Default Hidden di Desktop) */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 102; /* Paling atas */
   padding: 0;
 }
 
-nav a {
-  display: block;
-  text-decoration: none;
-  font-size: 18px;
-  padding: 8px;
-  border-radius: 8px;
-  transition: transform 0.8s ease;
+.menu-icon {
+  width: 28px;
+  height: 28px;
+  fill: white;
+  transition: fill 0.3s;
 }
 
-nav a:not(.title):hover {
-  text-shadow: #00FFA3 0px 0px 8px;
-  animation: pulse 1.5s infinite;
-  cursor: pointer;
-  transform: scale(1.1);
+.menu-toggle:hover .menu-icon {
+  fill: #00FFA3;
 }
 
-/* NavLink Active */
-nav a.active {
-  /* background-color: #001a4c; */
-  text-shadow: #00FFA3 0px 0px 8px;
-}
-
-/* HIDE HAMBURGER MENU ON DESKTOP */
-nav .menu {
-  display: none;
-  position: absolute;
-  top: 36px;
-  right: 24px;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 24px;
-  height: 18px;
-  gap: 6px;
-}
-
-nav .menu span {
-  height: 3px;
+/* Overlay Gelap (Backdrop) saat Sidebar Muncul */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-color: #efefef;
-  border-radius: 3px;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s;
 }
 
-/* MEDIA QUERIES */
-/* Mobile View */
+.nav-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* === MOBILE RESPONSIVE (Sidebar Logic) === */
 @media (max-width: 768px) {
-
-  nav .menu {
-    display: flex;
+  /* Tampilkan Tombol Hamburger */
+  .menu-toggle {
+    display: block;
   }
 
-  nav .logo-text{
-    display: none;
+  /* Ubah Nav Links Menjadi Sidebar */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0; /* Mulai dari kanan */
+    height: 100vh;
+    width: 250px; /* Lebar Sidebar */
+    background-color: #060010; /* Warna background gelap */
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+    
+    flex-direction: column; /* Susun vertikal */
+    justify-content: center;
+    align-items: center;
+    gap: 2.5rem;
+    
+    /* Animasi Slide */
+    transform: translateX(100%); /* Sembunyi ke kanan layar */
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    box-shadow: -5px 0 15px rgba(0,0,0,0.5);
   }
 
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 4px 8px;
+  /* Class saat sidebar dibuka */
+  .nav-links.open {
+    transform: translateX(0); /* Muncul ke layar */
   }
 
-  nav ul {
-    display: none;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 16px;
-    gap: 8px;
-  }
-
-  nav ul.open {
-    display: flex;
-  }
-
-  nav ul li {
-    width: 100%;
-    text-align: center;
+  /* Font size lebih besar di mobile */
+  .nav-item {
+    font-size: 1.25rem;
   }
 }
