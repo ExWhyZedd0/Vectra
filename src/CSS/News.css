@@ -6,16 +6,34 @@
   overflow-x: hidden;
   background-color: #060010;
   color: white;
-  position: relatived;
+  position: relative;
 }
 
-/* Selection Color (Highlight Teks) */
-.news-page-container ::selection {
+/* Scrollbar Custom */
+.news-page-container::-webkit-scrollbar {
+  width: 8px;
+}
+.news-page-container::-webkit-scrollbar-track {
+  background: #060010;
+}
+.news-page-container::-webkit-scrollbar-thumb {
   background-color: #00FFA3;
-  color: black;
+  border-radius: 4px;
 }
 
-/* Navbar Wrapper Fixed */
+/* Background Accent Fixed */
+.news-bg-accent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at top right, rgba(0, 255, 163, 0.1), transparent 50%);
+  pointer-events: none;
+  z-index: -10;
+}
+
+/* Navbar Wrapper */
 .news-navbar-wrapper {
   position: fixed;
   top: 0;
@@ -25,22 +43,20 @@
 }
 
 /* Content Wrapper */
-/* Mengatur agar konten di tengah horizontal & turun dari navbar */
 .news-content {
   width: 100%;
-  max-width: 80rem; /* setara max-w-7xl */
-  margin: 120px auto 0 auto; /* Top 120px, Auto kiri-kanan */
-  padding-bottom: 5rem; /* pb-20 */
-  padding-left: 1rem; /* px-4 */
+  max-width: 80rem; 
+  margin: 120px auto 0 auto; 
+  padding-bottom: 5rem;
+  padding-left: 1rem;
   padding-right: 1rem;
   text-align: center;
   box-sizing: border-box;
 }
 
-/* Responsive Padding */
 @media (min-width: 768px) {
   .news-content {
-    padding-left: 2rem; /* md:px-8 */
+    padding-left: 2rem;
     padding-right: 2rem;
   }
 }
@@ -48,13 +64,13 @@
 /* Typography */
 .news-title {
   font-family: 'Audiowide', cursive;
-  font-size: 2.25rem; /* text-4xl */
-  margin-bottom: 1.5rem; /* mb-6 */
+  font-size: 2.25rem;
+  margin-bottom: 1.5rem;
 }
 
 @media (min-width: 768px) {
   .news-title {
-    font-size: 3.75rem; /* md:text-6xl */
+    font-size: 3.75rem;
   }
 }
 
@@ -63,69 +79,164 @@
 }
 
 .news-subtitle {
-  color: #9ca3af; /* text-gray-400 */
+  color: #9ca3af;
   font-family: 'Fredoka', sans-serif;
   font-size: 1rem;
 }
 
-/* Grid Layout untuk Kartu Berita */
+/* Loading & Error */
+.loading-container {
+  margin-top: 3rem;
+  color: #00FFA3;
+  font-family: 'Audiowide', cursive;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 255, 163, 0.3);
+  border-top: 4px solid #00FFA3;
+  border-radius: 50%;
+  margin: 0 auto 1rem auto;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  background-color: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #ef4444;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin-top: 2rem;
+  display: inline-block;
+}
+
+/* Grid System */
 .news-grid {
   display: grid;
-  grid-template-columns: 1fr; /* Default 1 kolom (Mobile) */
-  gap: 1.5rem; /* gap-6 */
-  margin-top: 3rem; /* mt-12 */
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 3rem;
 }
 
 @media (min-width: 768px) {
   .news-grid {
-    grid-template-columns: repeat(3, 1fr); /* md:grid-cols-3 (Desktop) */
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Styling Kartu Berita */
+/* News Card */
 .news-card {
-  background-color: rgba(255, 255, 255, 0.05); /* bg-white/5 */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* border-white/10 */
-  padding: 1.5rem; /* p-6 */
-  border-radius: 1rem; /* rounded-2xl */
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1rem;
+  overflow: hidden;
   text-align: left;
-  cursor: pointer;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  text-decoration: none; /* Hilangkan garis bawah link */
+  color: white;
 }
 
 .news-card:hover {
-  border-color: rgba(0, 255, 163, 0.5); /* hover:border-[#00FFA3]/50 */
+  border-color: #00FFA3;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* Skeleton Image Placeholder */
-.news-image-placeholder {
-  height: 10rem; /* h-40 */
+/* Image Section */
+.news-image-wrapper {
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.1); /* bg-white/10 */
-  border-radius: 0.75rem; /* rounded-xl */
-  margin-bottom: 1rem; /* mb-4 */
-  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  height: 180px; /* Tinggi gambar tetap */
+  position: relative;
+  overflow: hidden;
+  background-color: #000;
 }
 
-/* Animasi Pulse Tailwind (Manual CSS) */
-@keyframes pulse {
-  0%, 100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: .5;
-  }
+.news-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Agar gambar tidak gepeng */
+  transition: transform 0.5s ease;
 }
 
-/* Typography di dalam Kartu */
+.news-card:hover .news-image {
+  transform: scale(1.05); /* Zoom effect saat hover */
+}
+
+.news-image-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #555;
+  background-color: #1a1a1a;
+  font-family: 'Fredoka', sans-serif;
+}
+
+/* Overlay "Read More" */
+.news-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #00FFA3;
+  font-family: 'Audiowide', cursive;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.news-card:hover .news-overlay {
+  opacity: 1;
+}
+
+/* Content Section */
+.news-card-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.news-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-bottom: 0.75rem;
+  font-family: 'Fredoka', sans-serif;
+}
+
+.news-source {
+  color: #00FFA3;
+  font-weight: bold;
+}
+
 .news-card-title {
   font-family: 'Audiowide', cursive;
-  font-size: 1.25rem; /* text-xl */
-  margin-bottom: 0.5rem; /* mb-2 */
+  font-size: 1.1rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+  color: white;
 }
 
 .news-card-desc {
   font-family: 'Fredoka', sans-serif;
-  font-size: 0.875rem; /* text-sm */
-  color: #9ca3af; /* text-gray-400 */
+  font-size: 0.875rem;
+  color: #9ca3af;
+  line-height: 1.5;
+  margin-top: auto; /* Dorong ke bawah jika konten pendek */
 }

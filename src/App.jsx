@@ -4,7 +4,8 @@ import { Routes, Route } from 'react-router-dom';
 // Pages - Pastikan semua file ini ADA di folder src/pages/
 import Home from './pages/Home.jsx';
 import MarketPage from './pages/MarketPage.jsx';
-import AboutUs from './pages/AboutUs.jsx'; // Ini yang tadi error
+import CoinDetail from './pages/CoinDetail.jsx';
+import AboutUs from './pages/AboutUs.jsx';
 import News from './pages/News.jsx';
 import FAQ from './pages/FAQ.jsx';
 
@@ -16,6 +17,7 @@ function App() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/market" element={<MarketPage />} />
+      <Route path="/market/:id" element={<CoinDetail />} />
       <Route path="/news" element={<News />} />
       <Route path="/faq" element={<FAQ />} />
       <Route path="/about-us" element={<AboutUs />} />
