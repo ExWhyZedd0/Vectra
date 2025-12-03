@@ -9,21 +9,19 @@ const CoinDetail = () => {
   
   const [coin, setCoin] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null); // State untuk menyimpan pesan error
+  const [error, setError] = useState(null);
 
   const fetchCoinDetail = async () => {
     setLoading(true);
     setError(null);
     try {
-      // Fetch Data Detail
+      // Fetch Data Detail dari CoinGecko
       const res = await fetch(`https://api.coingecko.com/api/v3/coins/${id}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=true`);
       
-      // Cek Status Limit (429)
       if (res.status === 429) {
         throw new Error("Too Many Requests. Please wait a few seconds and try again.");
       }
       
-      // Cek jika ID salah (404)
       if (res.status === 404) {
         throw new Error("Coin not found. It might be delisted or ID is wrong.");
       }
@@ -48,7 +46,6 @@ const CoinDetail = () => {
 
   const formatCurrency = (val) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
 
-  // TAMPILAN LOADING
   if (loading) return (
     <div className="detail-container">
       <div className="detail-bg-accent"></div>
@@ -58,7 +55,6 @@ const CoinDetail = () => {
     </div>
   );
 
-  // TAMPILAN ERROR (Rate Limit / Not Found)
   if (error) return (
     <div className="detail-container">
       <div className="detail-bg-accent"></div>
@@ -181,7 +177,7 @@ const SimpleSparkline = ({ data, color }) => {
   const max = Math.max(...data);
   const range = max - min;
   
-  if (range === 0) return null; // Prevent division by zero
+  if (range === 0) return null; 
 
   const points = data.map((d, i) => {
     const x = (i / (data.length - 1)) * width;

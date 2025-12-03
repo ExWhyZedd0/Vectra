@@ -7,18 +7,13 @@ const MarketTable = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   
-  // State untuk Filter & Sort
   const [search, setSearch] = useState('');
   const [sortType, setSortType] = useState('default'); 
   
-  // Ref untuk mencegah double-fetch di React Strict Mode
   const hasFetched = useRef(false);
-  
-  // Hook navigasi pindah halaman
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Mencegah fetch 2x saat development
     if (hasFetched.current) return;
     hasFetched.current = true;
 
@@ -26,20 +21,17 @@ const MarketTable = () => {
       setLoading(true);
       setError(null);
       
-      // Kita ambil 4 halaman x 250 data = 1000 koin
       const pages = [1, 2, 3, 4]; 
       let allFetchedCoins = [];
 
       try {
         for (const page of pages) {
-          // 1. Fetch data per halaman
           const response = await fetch(
             `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&page=${page}&sparkline=false`
           );
 
-          // 2. Handle Rate Limit (429)
           if (response.status === 429) {
-            throw new Error("API Rate Limit Hit! (Too many requests). Please wait a moment.");
+            throw new Error("API Rate Limit Hit! Please wait a moment.");
           }
           
           if (!response.ok) {
@@ -47,12 +39,9 @@ const MarketTable = () => {
           }
 
           const data = await response.json();
-          
-          // 3. Update State LANGSUNG agar user melihat data masuk bertahap
           allFetchedCoins = [...allFetchedCoins, ...data];
           setCoins(prevCoins => [...prevCoins, ...data]);
 
-          // 4. Delay 1.5 detik antar request agar API tidak memblokir kita
           await new Promise(resolve => setTimeout(resolve, 1500));
         }
       } catch (err) {
@@ -66,22 +55,31 @@ const MarketTable = () => {
     fetchIncremental();
   }, []);
 
-  // === LOGIC FILTER ===
   let filteredData = coins.filter(coin => 
     coin.name.toLowerCase().includes(search.toLowerCase()) || 
     coin.symbol.toLowerCase().includes(search.toLowerCase())
   );
 
-  // === LOGIC SORT ===
   if (sortType === 'gainers') {
     filteredData.sort((a, b) => b.price_change_percentage_24h - a.price_change_percentage_24h);
   } else if (sortType === 'losers') {
     filteredData.sort((a, b) => a.price_change_percentage_24h - b.price_change_percentage_24h);
   } 
-  // Jika 'default', biarkan urutan asli (Market Cap)
 
-  // Helper Format Uang
   const formatCurrency = (number) => {
+    if (!number) return "$0.00";
+    
+    // Jika harga sangat kecil (di bawah 1 dollar), tampilkan hingga 8 desimal
+    if (number < 1) {
+      return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 8,
+        maximumFractionDigits: 8,
+      }).format(number);
+    }
+    
+    // Jika harga normal, cukup 2 desimal standar
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
@@ -91,7 +89,6 @@ const MarketTable = () => {
   return (
     <div className="table-container">
       
-      {/* HEADER SECTION */}
       <div className="filter-header">
         <div className="header-left">
           <h2 className="table-title">Market Data</h2>
@@ -101,7 +98,6 @@ const MarketTable = () => {
         </div>
 
         <div className="header-right" style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
-          {/* SORT BUTTONS */}
           <div className="filter-group">
             <button 
               className={`filter-btn ${sortType === 'default' ? 'active' : ''}`} 
@@ -123,7 +119,6 @@ const MarketTable = () => {
             </button>
           </div>
 
-          {/* SEARCH INPUT */}
           <input 
             type="text" 
             placeholder="Search coin..." 
@@ -134,7 +129,6 @@ const MarketTable = () => {
         </div>
       </div>
 
-      {/* ERROR MESSAGE (Jika ada) */}
       {error && (
         <div style={{ 
           backgroundColor: 'rgba(239, 68, 68, 0.2)', 
@@ -150,7 +144,6 @@ const MarketTable = () => {
         </div>
       )}
 
-      {/* TABLE WRAPPER */}
       <div className="table-scroll-wrapper">
         <table className="market-table">
           <thead>
@@ -167,8 +160,8 @@ const MarketTable = () => {
               filteredData.map((coin, index) => (
                 <tr 
                   key={`${coin.id}-${index}`}
-                  onClick={() => navigate(`/market/${coin.id}`)} // Fitur Navigasi Klik
-                  style={{ cursor: 'pointer' }} // Indikator kursor berubah
+                  onClick={() => navigate(`/market/${coin.id}`)}
+                  style={{ cursor: 'pointer' }}
                 >
                   <td style={{ color: '#9ca3af' }}>{coin.market_cap_rank}</td>
                   <td>
@@ -180,7 +173,12 @@ const MarketTable = () => {
                       </div>
                     </div>
                   </td>
-                  <td>{formatCurrency(coin.current_price)}</td>
+                  
+                  {/* Styling khusus font Audiowide dihapus agar sama dengan Market Cap (Fredoka) */}
+                  <td>
+                    {formatCurrency(coin.current_price)}
+                  </td>
+                  
                   <td className={`percent-change ${coin.price_change_percentage_24h > 0 ? 'positive' : 'negative'}`}>
                     {coin.price_change_percentage_24h?.toFixed(2)}%
                   </td>
@@ -188,7 +186,6 @@ const MarketTable = () => {
                 </tr>
               ))
             ) : (
-              // Tampilan saat Loading atau Tidak ada Data
               <tr>
                 <td colSpan="5" style={{ textAlign: 'center', padding: '3rem', color: '#9ca3af' }}>
                   {loading ? (
@@ -205,7 +202,6 @@ const MarketTable = () => {
         </table>
       </div>
       
-      {/* FOOTER */}
       <div style={{textAlign: 'center', marginTop: '1rem', color: '#555', fontSize: '0.8rem', paddingBottom: '2rem'}}>
         {loading 
           ? "Loading data from CoinGecko..." 

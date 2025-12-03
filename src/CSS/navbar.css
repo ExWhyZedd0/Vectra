@@ -3,12 +3,23 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 2rem; /* Spacing standar */
-  width: 100%;
+  padding: 1rem 2rem; /* Padding disesuaikan agar proporsional */
+  
+  /* Ukuran & Posisi Floating */
+  width: 90%; /* Gunakan 90% agar ada jarak kiri-kanan di layar kecil */
   max-width: 1280px;
-  margin: 0 auto;
+  margin: 1.5rem auto 0 auto; /* Margin atas agar terlihat 'mengambang' */
+  
   position: relative;
   z-index: 100;
+
+  /* === GLASS EFFECT (EFEK KACA) === */
+  background: rgba(255, 255, 255, 0.03); /* Transparan gelap/putih tipis */
+  backdrop-filter: blur(16px);           /* Efek blur di belakangnya */
+  -webkit-backdrop-filter: blur(16px);   /* Support untuk Safari */
+  border: 1px solid rgba(255, 255, 255, 0.08); /* Garis tepi tipis */
+  border-radius: 1.5rem;                 /* Sudut membulat (Pill shape) */
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); /* Bayangan halus */
 }
 
 /* Logo */
@@ -30,19 +41,25 @@
   gap: 2rem;
   align-items: center;
   list-style: none;
+  margin: 0;      /* Reset margin list */
+  padding: 0;     /* Reset padding list */
 }
 
 .nav-item {
   text-decoration: none;
   color: #9ca3af; /* Gray-400 */
   font-family: 'Fredoka', sans-serif;
-  font-size: 1rem;
-  transition: color 0.3s ease;
+  font-size: 0.95rem; /* Sedikit dikecilkan agar elegan */
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
 }
 
+/* Efek Hover Glowing pada Text */
 .nav-item:hover,
 .nav-item.active {
   color: #00FFA3; /* Neon Green */
+  text-shadow: 0 0 8px rgba(0, 255, 163, 0.4);
 }
 
 /* Tombol Hamburger & Close (Default Hidden di Desktop) */
@@ -51,7 +68,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 102; /* Paling atas */
+  z-index: 102;
   padding: 0;
 }
 
@@ -93,34 +110,41 @@
     display: block;
   }
 
+  /* Reset style floating di mobile agar full width (opsional, tapi lebih rapi) */
+  .navbar {
+    width: 100%; 
+    border-radius: 0;
+    margin-top: 0;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(6, 0, 16, 0.8); /* Lebih gelap di mobile */
+  }
+
   /* Ubah Nav Links Menjadi Sidebar */
   .nav-links {
     position: fixed;
     top: 0;
-    right: 0; /* Mulai dari kanan */
+    right: 0;
     height: 100vh;
-    width: 250px; /* Lebar Sidebar */
-    background-color: #060010; /* Warna background gelap */
+    width: 250px;
+    background-color: #060010; /* Warna solid/gelap untuk sidebar */
     border-left: 1px solid rgba(255, 255, 255, 0.1);
     
-    flex-direction: column; /* Susun vertikal */
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2.5rem;
     
-    /* Animasi Slide */
-    transform: translateX(100%); /* Sembunyi ke kanan layar */
+    transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 100;
     box-shadow: -5px 0 15px rgba(0,0,0,0.5);
   }
 
-  /* Class saat sidebar dibuka */
   .nav-links.open {
-    transform: translateX(0); /* Muncul ke layar */
+    transform: translateX(0);
   }
 
-  /* Font size lebih besar di mobile */
   .nav-item {
     font-size: 1.25rem;
   }
