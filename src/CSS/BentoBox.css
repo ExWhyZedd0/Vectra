@@ -1,0 +1,168 @@
+/* Container Utama Bento */
+.bento-wrapper {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 1s ease-out;
+}
+
+.bento-wrapper.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Grid Layout */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 20px;
+  width: 100%;
+}
+
+/* Responsif: Tablet 2 Kolom, Desktop 3-4 Kolom */
+@media (min-width: 768px) {
+  .bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 250px); /* Tinggi baris tetap */
+  }
+}
+
+@media (min-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: 2fr 1fr 1fr; /* Kolom 1 lebih lebar */
+    grid-template-rows: 250px 250px;
+  }
+}
+
+/* Style Dasar Kotak Bento */
+.bento-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 24px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+}
+
+.bento-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 255, 163, 0.3);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* === KOTAK SPESIFIK: TRENDING (Most Popular) === */
+.bento-trending {
+  grid-column: span 1; /* Default mobile */
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1024px) {
+  .bento-trending {
+    grid-column: span 1; /* Di desktop ambil 1 slot kolom vertical */
+    grid-row: span 2; /* Memanjang ke bawah (Tall box) */
+  }
+}
+
+.bento-title {
+  font-family: 'Audiowide', cursive;
+  font-size: 1.2rem;
+  color: white;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon-fire {
+  color: #ff9f43;
+}
+
+/* List Trending dalam Bento */
+.trending-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1; /* Isi sisa ruang */
+  overflow-y: auto; /* Scroll jika kepanjangan */
+  padding-right: 5px; /* Space untuk scrollbar */
+}
+
+/* Item Koin Kecil */
+.trending-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-decoration: none;
+  color: white;
+}
+
+.trending-item:hover {
+  background: rgba(0, 255, 163, 0.1);
+}
+
+.t-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.t-info {
+  flex: 1;
+}
+
+.t-name {
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.9rem;
+  font-weight: bold;
+  display: block;
+}
+
+.t-symbol {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+
+.t-rank {
+  font-family: 'Audiowide', cursive;
+  font-size: 0.8rem;
+  color: #00FFA3;
+}
+
+/* === KOTAK LAIN (Placeholder) === */
+.bento-large {
+  grid-column: span 1;
+}
+@media (min-width: 1024px) {
+  .bento-large {
+    grid-column: span 2; /* Lebar 2 kolom */
+  }
+}
+
+.bento-stat-num {
+  font-family: 'Audiowide', cursive;
+  font-size: 3rem;
+  color: #00FFA3;
+  margin-top: auto;
+}
+
+.bento-desc {
+  font-family: 'Fredoka', sans-serif;
+  color: #9ca3af;
+  line-height: 1.5;
+}
