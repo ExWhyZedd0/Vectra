@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../CSS/MarketTable.css'; // Pastikan path ini sesuai dengan struktur folder Anda
+import '../CSS/MarketTable.css';
 
 const MarketTable = () => {
   const [coins, setCoins] = useState([]);

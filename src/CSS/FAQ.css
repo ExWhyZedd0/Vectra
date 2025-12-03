@@ -1,4 +1,4 @@
-/* Container Utama */
+/* === CONTAINER & LAYOUT === */
 .faq-page-container {
   height: 100vh;
   width: 100%;
@@ -9,13 +9,19 @@
   position: relative;
 }
 
-/* Selection Color */
-.faq-page-container ::selection {
+/* Scrollbar Custom */
+.faq-page-container::-webkit-scrollbar {
+  width: 8px;
+}
+.faq-page-container::-webkit-scrollbar-track {
+  background: #060010;
+}
+.faq-page-container::-webkit-scrollbar-thumb {
   background-color: #00FFA3;
-  color: black;
+  border-radius: 4px;
 }
 
-/* Navbar Wrapper Fixed */
+/* Background Accent Fixed */
 .faq-navbar-wrapper {
   position: fixed;
   top: 0;
@@ -25,74 +31,172 @@
 }
 
 /* Content Wrapper */
-/* max-w-4xl setara dengan 56rem */
 .faq-content {
   width: 100%;
-  max-width: 56rem; 
-  margin: 120px auto 0 auto; /* Top 120px, Auto kiri-kanan */
-  padding-bottom: 5rem; /* pb-20 */
-  padding-left: 1rem; /* px-4 */
-  padding-right: 1rem;
+  max-width: 80rem; /* setara max-w-7xl */
+  margin: 120px auto 0 auto;
+  padding-bottom: 5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
   box-sizing: border-box;
 }
 
-/* Responsive Padding Desktop */
 @media (min-width: 768px) {
   .faq-content {
-    padding-left: 2rem; /* md:px-8 */
+    padding-left: 2rem;
     padding-right: 2rem;
   }
 }
 
-/* Header Section */
+/* === HEADER SECTION === */
 .faq-header {
   text-align: center;
-  margin-bottom: 3rem; /* mb-12 */
+  margin-bottom: 3rem;
 }
 
 .faq-title {
   font-family: 'Audiowide', cursive;
-  font-size: 2.25rem; /* text-4xl */
-  margin-bottom: 1.5rem;
+  font-size: 2.25rem;
+  margin-bottom: 1rem;
+  color: white;
 }
 
 @media (min-width: 768px) {
   .faq-title {
-    font-size: 3.75rem; /* md:text-6xl */
+    font-size: 3.75rem;
   }
 }
 
-/* List Pertanyaan */
+.faq-subtitle {
+  font-family: 'Fredoka', sans-serif;
+  color: #9ca3af;
+  font-size: 1.1rem;
+}
+
+/* === FAQ LIST LAYOUT === */
 .faq-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem; /* gap-4 */
+  gap: 1rem;
 }
 
-/* Kartu FAQ */
+/* Desktop: Grid 2 Kolom */
+@media (min-width: 768px) {
+  .faq-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+}
+
+/* === FAQ ITEM / CARD STYLING === */
 .faq-item {
-  background-color: rgba(255, 255, 255, 0.05); /* bg-white/5 */
-  border: 1px solid rgba(255, 255, 255, 0.1); /* border-white/10 */
-  padding: 1.5rem; /* p-6 */
-  border-radius: 1rem; /* rounded-2xl */
-  transition: border-color 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 1rem;
+  transition: all 0.3s ease;
+  cursor: pointer; /* Indikasi bisa diklik (Mobile) */
+  overflow: hidden; /* Penting untuk animasi slide */
 }
 
+/* Hover Effect */
 .faq-item:hover {
-  border-color: rgba(0, 255, 163, 0.3);
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 255, 163, 0.4);
+}
+
+/* Baris Judul + Icon */
+.faq-question-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
 }
 
 .faq-question {
   font-family: 'Audiowide', cursive;
-  font-size: 1.125rem; /* text-lg */
+  font-size: 1rem;
   color: #00FFA3;
-  margin-bottom: 0.5rem; /* mb-2 */
-  margin-top: 0;
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+}
+
+/* Icon Panah (Default: Muncul) */
+.faq-icon {
+  color: #9ca3af;
+  font-size: 0.8rem;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+/* === LOGIKA DROPDOWN (MOBILE) === */
+.faq-answer-wrapper {
+  /* Default Mobile: Tertutup */
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
 }
 
 .faq-answer {
   font-family: 'Fredoka', sans-serif;
-  color: #d1d5db; /* text-gray-300 */
+  color: #d1d5db; /* Gray-300 */
   line-height: 1.6;
   margin: 0;
+  font-size: 0.95rem;
+}
+
+/* STATE AKTIF (MOBILE): SAAT DIBUKA */
+.faq-item.active {
+  background-color: rgba(0, 255, 163, 0.05);
+  border-color: #00FFA3;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg); /* Putar panah */
+  color: #00FFA3;
+}
+
+.faq-item.active .faq-answer-wrapper {
+  max-height: 300px; /* Cukup tinggi untuk menampung teks */
+  opacity: 1;
+  margin-top: 1rem; /* Jarak dari judul */
+}
+
+/* === DESKTOP OVERRIDES (MATIKAN DROPDOWN) === */
+@media (min-width: 768px) {
+  /* Ubah kursor jadi default karena tidak perlu diklik */
+  .faq-item {
+    cursor: default; 
+    padding: 2rem;
+    height: 100%; /* Agar tinggi rata dalam grid */
+  }
+
+  /* Hilangkan Icon Panah */
+  .faq-icon {
+    display: none;
+  }
+
+  /* Paksa Jawaban Selalu Muncul */
+  .faq-answer-wrapper {
+    max-height: none !important; /* Override animasi */
+    opacity: 1 !important;
+    margin-top: 1rem !important;
+    overflow: visible;
+  }
+
+  /* Reset style active (agar tidak hijau terus di desktop) */
+  .faq-item.active {
+    background-color: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Tetap izinkan hover effect */
+  .faq-item:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: rgba(0, 255, 163, 0.4);
+    transform: translateY(-5px);
+  }
 }

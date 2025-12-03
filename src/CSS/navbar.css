@@ -17,7 +17,7 @@
   font-size: 1.5rem;
   color: white;
   text-decoration: none;
-  z-index: 101; /* Agar tetap di atas saat sidebar muncul */
+  z-index: 101;
 }
 
 .nav-logo span {

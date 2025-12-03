@@ -13,31 +13,40 @@ const News = () => {
         setLoading(true);
         setError(null);
 
-        // MENGGUNAKAN API BARU: CryptoCompare
-        // Endpoint ini publik, gratis, dan stabil
+        // Fetch dari CryptoCompare
         const response = await fetch('https://min-api.cryptocompare.com/data/v2/news/?lang=EN');
         
         if (!response.ok) {
-          throw new Error(`Failed to fetch news. Status: ${response.status}`);
+          throw new Error(`API Error: ${response.status}`);
         }
         
         const result = await response.json();
 
-        // Data berita di CryptoCompare ada di dalam properti 'Data'
-        const articles = result.Data || [];
-        
-        if (articles.length === 0) {
-           console.warn("API returned no news data");
+        // === PERBAIKAN UTAMA DI SINI ===
+        // 1. Ambil data dari result.Data
+        let articles = result.Data;
+
+        // 2. SAFETY CHECK: Pastikan 'articles' adalah Array
+        // Jika articles itu undefined, null, atau bukan array (misal object error), paksa jadi []
+        if (!Array.isArray(articles)) {
+          console.warn("API response 'Data' is not an array:", result);
+          articles = []; 
         }
 
-        // Kita ambil 12 berita pertama
-        setNewsData(articles.slice(0, 12));
+        // 3. Cek jika kosong
+        if (articles.length === 0) {
+           console.warn("No news articles found.");
+        }
+
+        // 4. Slice dengan aman karena kita sudah yakin ini Array
+        setNewsData(articles.slice(0, 36));
         setLoading(false);
 
       } catch (err) {
-        console.error("Error fetching news:", err);
+        console.error("Fetch Error:", err);
         setError(err.message);
         setLoading(false);
+        setNewsData([]); // Reset ke array kosong jika error
       }
     };
 
@@ -46,7 +55,6 @@ const News = () => {
 
   const truncateText = (text, maxLength) => {
     if (!text) return "";
-    // Bersihkan karakter aneh HTML entities jika ada
     const cleanText = text.replace(/&nbsp;/g, ' ').replace(/<[^>]*>?/gm, '');
     if (cleanText.length <= maxLength) return cleanText;
     return cleanText.substr(0, maxLength) + "...";
@@ -54,7 +62,6 @@ const News = () => {
 
   const formatDate = (timestamp) => {
     if (!timestamp) return "";
-    // CryptoCompare menggunakan UNIX timestamp (detik), JS butuh milidetik (* 1000)
     const date = new Date(timestamp * 1000);
     const options = { year: 'numeric', month: 'short', day: 'numeric' };
     return date.toLocaleDateString('en-US', options);
@@ -84,13 +91,14 @@ const News = () => {
 
         {error && (
           <div className="error-message">
-            ⚠️ {error}
+            ⚠️ {error} <br/>
+            <small style={{fontSize:'0.8rem'}}>Check console (F12) for details.</small>
           </div>
         )}
 
         {!loading && !error && newsData.length === 0 && (
            <div style={{marginTop: '2rem', color: '#9ca3af'}}>
-             No news articles found at the moment.
+             No news articles found. Please try again later.
            </div>
         )}
 
@@ -99,13 +107,13 @@ const News = () => {
             {newsData.map((item, index) => (
               <a 
                 key={item.id || index} 
-                href={item.url} // CryptoCompare field: url
+                href={item.url} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="news-card"
               >
                 <div className="news-image-wrapper">
-                  {item.imageurl ? ( // CryptoCompare field: imageurl
+                  {item.imageurl ? (
                     <img 
                       src={item.imageurl} 
                       alt={item.title} 
@@ -121,13 +129,10 @@ const News = () => {
                 <div className="news-card-content">
                   <div className="news-meta">
                     <span className="news-source">{item.source_info?.name || "CryptoNews"}</span>
-                    {/* CryptoCompare field: published_on */}
                     <span className="news-date">{formatDate(item.published_on)}</span>
                   </div>
                   
-                  {/* CryptoCompare field: title */}
                   <h3 className="news-card-title">{truncateText(item.title, 60)}</h3>
-                  {/* CryptoCompare field: body */}
                   <p className="news-card-desc">{truncateText(item.body, 100)}</p>
                 </div>
               </a>
