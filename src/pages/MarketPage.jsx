@@ -6,50 +6,27 @@ import '../CSS/MarketPage.css';
 const MarketPage = () => {
   const [globalStats, setGlobalStats] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [useBackup, setUseBackup] = useState(false);
 
   useEffect(() => {
     const fetchGlobalData = async () => {
       setLoading(true);
       try {
-        // --- PERCOBAAN 1: COINGECKO ---
+        // HANYA MENGGUNAKAN COINGECKO
         const response = await fetch('https://api.coingecko.com/api/v3/global');
         
         if (!response.ok) {
-          throw new Error('CoinGecko Limit Hit');
+          throw new Error('Failed to fetch global data from CoinGecko');
         }
 
         const result = await response.json();
         
-        if (!result.data) {
-          throw new Error('CoinGecko Data Empty');
+        if (result && result.data) {
+          setGlobalStats(result.data);
         }
-
-        setGlobalStats(result.data);
-        setUseBackup(false);
 
       } catch (error) {
-        console.warn("CoinGecko Global gagal, beralih ke CoinPaprika...", error);
-        
-        // --- PERCOBAAN 2: COINPAPRIKA (BACKUP) ---
-        try {
-          const resBackup = await fetch('https://api.coinpaprika.com/v1/global');
-          const dataBackup = await resBackup.json();
-
-          // KITA REKAYASA STRUKTUR DATA AGAR SAMA DENGAN COINGECKO
-          // Jadi kita tidak perlu ubah codingan tampilan di bawah
-          const formattedData = {
-            total_market_cap: { usd: dataBackup.market_cap_usd },
-            total_volume: { usd: dataBackup.volume_24h_usd },
-            market_cap_percentage: { btc: dataBackup.bitcoin_dominance_percentage },
-            market_cap_change_percentage_24h_usd: dataBackup.market_cap_change_24h
-          };
-
-          setGlobalStats(formattedData);
-          setUseBackup(true);
-        } catch (errBackup) {
-          console.error("Semua API Global gagal.", errBackup);
-        }
+        console.error("Error fetching global stats:", error);
+        // Tidak ada fallback ke API lain.
       } finally {
         setLoading(false);
       }
@@ -118,13 +95,6 @@ const MarketPage = () => {
           />
 
         </div>
-        
-        {/* Indikator kecil jika pakai backup data */}
-        {useBackup && (
-          <div style={{textAlign: 'center', color: '#555', fontSize: '0.8rem', marginTop: '-2rem', marginBottom: '2rem'}}>
-            *Global stats powered by CoinPaprika due to network load.
-          </div>
-        )}
 
         <div className="w-full">
             <MarketTable />

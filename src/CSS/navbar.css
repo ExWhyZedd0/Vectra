@@ -14,7 +14,7 @@
   z-index: 100;
 
   /* === GLASS EFFECT (EFEK KACA) === */
-  background: rgba(255, 255, 255, 0.03); /* Transparan gelap/putih tipis */
+  background: rgba(255, 255, 255, 0.075); /* Transparan gelap/putih tipis */
   backdrop-filter: blur(16px);           /* Efek blur di belakangnya */
   -webkit-backdrop-filter: blur(16px);   /* Support untuk Safari */
   border: 1px solid rgba(255, 255, 255, 0.08); /* Garis tepi tipis */
@@ -47,7 +47,7 @@
 
 .nav-item {
   text-decoration: none;
-  color: #9ca3af; /* Gray-400 */
+  color: #efefef; /* Gray-400 */
   font-family: 'Fredoka', sans-serif;
   font-size: 0.95rem; /* Sedikit dikecilkan agar elegan */
   font-weight: 500;
