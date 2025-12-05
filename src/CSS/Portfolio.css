@@ -1,0 +1,146 @@
+/* Container Utama */
+.portfolio-container {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  background-color: transparent; /* Biar DarkVeil kelihatan */
+}
+
+/* Content Wrapper */
+.portfolio-content {
+  max-width: 1200px;
+  margin: 120px auto 0;
+  padding: 0 20px 80px 20px;
+}
+
+/* === HEADER BALANCE (Saldo Utama) === */
+.balance-card {
+  text-align: center;
+  margin-bottom: 40px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  backdrop-filter: blur(10px);
+}
+
+.balance-label {
+  font-family: 'Fredoka', sans-serif;
+  color: #9ca3af;
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+}
+
+.balance-amount {
+  font-family: 'Audiowide', cursive;
+  font-size: 3.5rem;
+  color: white;
+  margin: 0;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.balance-change {
+  font-family: 'Fredoka', sans-serif;
+  font-weight: bold;
+  margin-top: 10px;
+  font-size: 1.1rem;
+  padding: 6px 16px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.balance-change.positive { background: rgba(0, 255, 163, 0.15); color: #00FFA3; }
+.balance-change.negative { background: rgba(239, 68, 68, 0.15); color: #ef4444; }
+
+/* === TOMBOL ACTION === */
+.portfolio-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.btn-add-asset {
+  background: #00FFA3;
+  color: black;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-family: 'Audiowide', cursive;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-add-asset:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(0, 255, 163, 0.4);
+}
+
+/* === TABEL HOLDINGS === */
+.holdings-wrapper {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden; /* Agar sudut tabel tumpul */
+}
+
+.holdings-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.holdings-table th {
+  text-align: left;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  font-family: 'Audiowide', cursive;
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.holdings-table td {
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+}
+
+.holdings-table tr:last-child td {
+  border-bottom: none;
+}
+
+.holdings-table tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Info Aset (Icon + Nama) */
+.asset-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.asset-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.asset-name { display: block; font-weight: bold; font-family: 'Fredoka', sans-serif; }
+.asset-symbol { color: #9ca3af; font-size: 0.85rem; text-transform: uppercase; }
+
+/* Text Styles */
+.text-val { font-family: 'Audiowide', cursive; letter-spacing: 0.5px; }
+.text-sub { display: block; font-size: 0.85rem; color: #9ca3af; margin-top: 4px; font-family: 'Fredoka', sans-serif;}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .balance-amount { font-size: 2.5rem; }
+  .portfolio-content { padding-left: 15px; padding-right: 15px; }
+  
+  /* Scroll table di HP */
+  .holdings-wrapper { overflow-x: auto; }
+  .holdings-table { min-width: 600px; }
+}

@@ -1,68 +1,114 @@
 /* Container Utama Navbar */
 .navbar {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem; /* Padding disesuaikan agar proporsional */
+  justify-content: space-between; /* Pastikan Logo kiri, sisa konten kanan */
+  padding: 1rem 2rem;
   
-  /* Ukuran & Posisi Floating */
-  width: 90%; /* Gunakan 90% agar ada jarak kiri-kanan di layar kecil */
+  width: 90%;
   max-width: 1280px;
-  margin: 1.5rem auto 0 auto; /* Margin atas agar terlihat 'mengambang' */
+  margin: 1.5rem auto 0 auto;
   
-  position: relative;
+  position: relative; /* Induk relatif untuk absolute centering */
   z-index: 100;
 
-  /* === GLASS EFFECT (EFEK KACA) === */
-  background: rgba(255, 255, 255, 0.075); /* Transparan gelap/putih tipis */
-  backdrop-filter: blur(16px);           /* Efek blur di belakangnya */
-  -webkit-backdrop-filter: blur(16px);   /* Support untuk Safari */
-  border: 1px solid rgba(255, 255, 255, 0.08); /* Garis tepi tipis */
-  border-radius: 1.5rem;                 /* Sudut membulat (Pill shape) */
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2); /* Bayangan halus */
+  /* Glass Effect */
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* Logo */
+/* Logo (Kiri) */
 .nav-logo {
   font-family: 'Audiowide', cursive;
   font-size: 1.5rem;
   color: white;
   text-decoration: none;
   z-index: 101;
+  position: relative; /* Agar tetap bisa diklik */
 }
 
 .nav-logo span {
   color: #00FFA3;
 }
 
-/* === DESKTOP MENU === */
+/* Wrapper Navigasi (Desktop) */
 .nav-links {
   display: flex;
-  gap: 2rem;
   align-items: center;
-  list-style: none;
-  margin: 0;      /* Reset margin list */
-  padding: 0;     /* Reset padding list */
+  /* Kita tidak set width 100% di sini agar tidak mengganggu layout */
 }
 
+/* === PERBAIKAN TENGAH PRESISI (ABSOLUTE CENTERING) === */
+/* Hanya berlaku di Desktop */
+@media (min-width: 769px) {
+  .nav-menu-list {
+    position: absolute;       /* Lepaskan dari aliran normal */
+    left: 50%;                /* Taruh titik awal di 50% layar */
+    transform: translateX(-50%); /* Geser balik 50% dari lebar menu sendiri */
+    
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;      /* Mencegah teks turun baris */
+  }
+
+  /* Pastikan container nav-links di desktop mengambil sisa ruang untuk dorong Auth ke kanan */
+  .nav-links {
+    flex-grow: 1;
+    justify-content: flex-end; /* Dorong Auth ke paling kanan */
+  }
+}
+
+/* Tombol Auth (Kanan) */
+.nav-auth-group {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  z-index: 101; /* Pastikan di atas layer lain */
+}
+
+/* Styling Menu Item */
 .nav-item {
   text-decoration: none;
-  color: #efefef; /* Gray-400 */
+  color: #9ca3af;
   font-family: 'Fredoka', sans-serif;
-  font-size: 0.95rem; /* Sedikit dikecilkan agar elegan */
+  font-size: 0.95rem;
   font-weight: 500;
   transition: all 0.3s ease;
-  position: relative;
 }
 
-/* Efek Hover Glowing pada Text */
 .nav-item:hover,
 .nav-item.active {
-  color: #00FFA3; /* Neon Green */
+  color: #00FFA3;
   text-shadow: 0 0 8px rgba(0, 255, 163, 0.4);
 }
 
-/* Tombol Hamburger & Close (Default Hidden di Desktop) */
+/* Tombol Register */
+.btn-register {
+  background: rgba(0, 255, 163, 0.1);
+  border: 1px solid #00FFA3;
+  color: #00FFA3;
+  padding: 8px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-family: 'Audiowide', cursive;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.btn-register:hover {
+  background: #00FFA3;
+  color: black;
+  box-shadow: 0 0 15px rgba(0, 255, 163, 0.4);
+}
+
+/* === MOBILE RESPONSIVE === */
 .menu-toggle {
   display: none;
   background: none;
@@ -83,7 +129,7 @@
   fill: #00FFA3;
 }
 
-/* Overlay Gelap (Backdrop) saat Sidebar Muncul */
+/* Overlay Mobile */
 .nav-overlay {
   position: fixed;
   top: 0;
@@ -103,35 +149,43 @@
   visibility: visible;
 }
 
-/* === MOBILE RESPONSIVE (Sidebar Logic) === */
 @media (max-width: 768px) {
-  /* Tampilkan Tombol Hamburger */
   .menu-toggle {
     display: block;
   }
 
-  /* Reset style floating di mobile agar full width (opsional, tapi lebih rapi) */
   .navbar {
     width: 100%; 
     border-radius: 0;
     margin-top: 0;
     border: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(6, 0, 16, 0.8); /* Lebih gelap di mobile */
+    background: rgba(6, 0, 16, 0.8);
+    justify-content: space-between;
   }
 
-  /* Ubah Nav Links Menjadi Sidebar */
+  /* RESET LOGIC ABSOLUTE DI MOBILE */
+  .nav-menu-list {
+    position: static; /* Kembali ke normal flow */
+    transform: none;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* Sidebar Logic */
   .nav-links {
     position: fixed;
     top: 0;
     right: 0;
     height: 100vh;
     width: 250px;
-    background-color: #060010; /* Warna solid/gelap untuk sidebar */
+    background-color: #060010;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
     
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* Vertikal center di sidebar */
     align-items: center;
     gap: 2.5rem;
     
@@ -143,6 +197,12 @@
 
   .nav-links.open {
     transform: translateX(0);
+  }
+
+  .nav-auth-group {
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
   }
 
   .nav-item {

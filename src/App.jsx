@@ -8,6 +8,9 @@ import CoinDetail from './pages/CoinDetail.jsx';
 import AboutUs from './pages/AboutUs.jsx';
 import News from './pages/News.jsx';
 import FAQ from './pages/FAQ.jsx';
+import Login from './pages/Login.jsx';
+import Register from './pages/Register.jsx';
+import Portfolio from './pages/Portfolio.jsx';
 
 // CSS Utama
 import './App.css'
@@ -21,6 +24,9 @@ function App() {
       <Route path="/news" element={<News />} />
       <Route path="/faq" element={<FAQ />} />
       <Route path="/about-us" element={<AboutUs />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/portfolio" element={<Portfolio />} />
     </Routes>
   )
 }
