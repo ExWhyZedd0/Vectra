@@ -8,11 +8,16 @@ const SellAssetModal = ({ isOpen, onClose, asset, onSuccess }) => {
 
   if (!isOpen || !asset) return null;
 
+  // --- FITUR BARU: TOMBOL MAX ---
+  const handleMaxClick = () => {
+    setAmount(asset.amount); // Isi input dengan semua jumlah aset
+  };
+
   const handleSell = async (e) => {
     e.preventDefault();
     const sellAmount = parseFloat(amount);
     
-    // Validasi input
+    // Validasi
     if (sellAmount <= 0) {
       alert("Amount must be greater than 0");
       return;
@@ -26,14 +31,14 @@ const SellAssetModal = ({ isOpen, onClose, asset, onSuccess }) => {
 
     try {
       if (sellAmount === asset.amount) {
-        // SKENARIO 1: JUAL SEMUA -> HAPUS DARI DB
+        // JUAL SEMUA -> HAPUS DARI DB
         const { error } = await supabase
           .from('portfolio')
           .delete()
-          .eq('id', asset.db_id); // Hapus berdasarkan ID database
+          .eq('id', asset.db_id);
         if (error) throw error;
       } else {
-        // SKENARIO 2: JUAL SEBAGIAN -> UPDATE DB
+        // JUAL SEBAGIAN -> UPDATE DB
         const newAmount = asset.amount - sellAmount;
         const { error } = await supabase
           .from('portfolio')
@@ -43,9 +48,9 @@ const SellAssetModal = ({ isOpen, onClose, asset, onSuccess }) => {
       }
 
       alert(`Successfully sold ${sellAmount} ${asset.symbol.toUpperCase()}!`);
-      onSuccess(); // Refresh data di Portfolio
-      onClose(); // Tutup modal
-      setAmount(''); // Reset
+      if (onSuccess) onSuccess(); 
+      onClose(); 
+      setAmount(''); 
       
     } catch (err) {
       alert("Failed to sell: " + err.message);
@@ -54,7 +59,6 @@ const SellAssetModal = ({ isOpen, onClose, asset, onSuccess }) => {
     }
   };
 
-  // Estimasi nilai jual (USD)
   const estimatedValue = amount ? (parseFloat(amount) * asset.current_price) : 0;
 
   return (
@@ -69,19 +73,46 @@ const SellAssetModal = ({ isOpen, onClose, asset, onSuccess }) => {
         <form onSubmit={handleSell}>
           <div>
             <label style={{color:'#9ca3af', fontSize:'0.8rem'}}>Amount to Sell</label>
-            <input 
-              type="number" 
-              step="any"
-              className="modal-input" 
-              placeholder="0.00" 
-              value={amount}
-              onChange={e => setAmount(e.target.value)}
-              required
-              autoFocus
-            />
+            
+            {/* WRAPPER INPUT AGAR TOMBOL MAX BISA DI DALAM */}
+            <div style={{position: 'relative', display: 'flex', alignItems: 'center'}}>
+              <input 
+                type="number" 
+                step="any"
+                className="modal-input" 
+                placeholder="0.00" 
+                value={amount}
+                onChange={e => setAmount(e.target.value)}
+                required
+                autoFocus
+                style={{paddingRight: '60px', marginBottom: '15px'}} // Beri jarak kanan untuk tombol Max
+              />
+              
+              {/* TOMBOL MAX */}
+              <button
+                type="button" // PENTING: type="button" agar tidak submit form
+                onClick={handleMaxClick}
+                style={{
+                  position: 'absolute',
+                  right: '10px',
+                  top: '12px', // Sesuaikan posisi vertikal
+                  background: 'rgba(239, 68, 68, 0.2)',
+                  border: '1px solid #ef4444',
+                  color: '#ef4444',
+                  borderRadius: '4px',
+                  padding: '2px 8px',
+                  fontSize: '0.7rem',
+                  fontFamily: 'Audiowide',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                  zIndex: 5
+                }}
+              >
+                MAX
+              </button>
+            </div>
           </div>
           
-          {/* Estimasi Dapat Uang Berapa */}
           <div style={{background:'rgba(239, 68, 68, 0.1)', padding:'10px', borderRadius:'8px', marginBottom:'15px', textAlign:'center'}}>
             <span style={{color:'#9ca3af', fontSize:'0.8rem'}}>You will receive:</span>
             <div style={{color:'#ef4444', fontFamily:'Audiowide', fontSize:'1.2rem'}}>
