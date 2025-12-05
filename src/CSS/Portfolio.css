@@ -1,9 +1,36 @@
 /* Container Utama */
 .portfolio-container {
-  min-height: 100vh;
+  height: 100vh; /* Ubah min-height jadi height agar fix selayar */
   width: 100%;
   position: relative;
-  background-color: transparent; /* Biar DarkVeil kelihatan */
+  background-color: transparent;
+  
+  /* PROPERTI PENTING UNTUK SCROLL */
+  overflow-y: auto;  /* Izinkan scroll vertikal */
+  overflow-x: hidden; /* Sembunyikan scroll horizontal */
+  
+  /* Scrollbar Custom (Opsional - agar seragam dengan page lain) */
+  scrollbar-width: thin;
+  scrollbar-color: #00FFA3 rgba(255, 255, 255, 0.05);
+}
+
+.portfolio-container::-webkit-scrollbar {
+  width: 8px;
+}
+.portfolio-container::-webkit-scrollbar-track {
+  background: #060010;
+}
+.portfolio-container::-webkit-scrollbar-thumb {
+  background-color: #00FFA3;
+  border-radius: 4px;
+}
+
+/* Content Wrapper */
+.portfolio-content {
+  max-width: 1200px;
+  margin: 120px auto 0;
+  padding: 0 20px 80px 20px;
+  /* Pastikan padding bawah cukup agar konten terbawah tidak kepotong */
 }
 
 /* Content Wrapper */

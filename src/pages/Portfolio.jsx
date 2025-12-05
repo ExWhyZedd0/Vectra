@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/navbar';
 import DarkVeil from '../components/darkveil';
@@ -10,21 +10,25 @@ const Portfolio = () => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // DATA DUMMY (Nanti kita ganti dengan data dari Database Supabase)
-  // Bayangkan user memiliki 0.5 BTC, 10 ETH, dan 5000 XRP.
+  // STATE UNTUK ANIMASI BACKGROUND (Agar ombak gerak saat scroll)
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const containerRef = useRef(null);
+
+  // DATA DUMMY
   const [holdings, setHoldings] = useState([
     { id: 'bitcoin', symbol: 'btc', name: 'Bitcoin', amount: 0.45, price: 96500, change24h: 2.5 },
     { id: 'ethereum', symbol: 'eth', name: 'Ethereum', amount: 12.5, price: 3500, change24h: -1.2 },
     { id: 'solana', symbol: 'sol', name: 'Solana', amount: 150, price: 145, change24h: 5.4 },
     { id: 'ripple', symbol: 'xrp', name: 'XRP', amount: 5000, price: 0.62, change24h: 0.8 },
+    { id: 'dogecoin', symbol: 'doge', name: 'Dogecoin', amount: 10000, price: 0.38, change24h: 12.5 }, // Tambah dummy biar panjang
+    { id: 'cardano', symbol: 'ada', name: 'Cardano', amount: 2500, price: 1.10, change24h: -0.5 },
   ]);
 
-  // Cek Login (Proteksi Halaman)
+  // LOGIC 1: Cek Login
   useEffect(() => {
     const checkUser = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (!session) {
-        // Jika belum login, tendang ke halaman login
         navigate('/login');
       } else {
         setUser(session.user);
@@ -34,19 +38,34 @@ const Portfolio = () => {
     checkUser();
   }, [navigate]);
 
-  // Hitung Total Balance
+  // LOGIC 2: Scroll Listener (PENTING)
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleScroll = () => {
+      const { scrollTop, scrollHeight, clientHeight } = container;
+      // Hitung persentase scroll (0.0 sampai 1.0)
+      const progress = scrollTop / (scrollHeight - clientHeight);
+      setScrollProgress(progress || 0);
+    };
+
+    container.addEventListener('scroll', handleScroll);
+    return () => container.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const totalBalance = holdings.reduce((acc, asset) => acc + (asset.amount * asset.price), 0);
-  
-  // Format Uang
   const formatUSD = (num) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
 
-  if (loading) return null; // Atau tampilkan spinner
+  if (loading) return null;
 
   return (
-    <div className="portfolio-container">
-      {/* Background DarkVeil Hitam */}
+    // TAMBAHKAN REF KE CONTAINER UTAMA
+    <div className="portfolio-container" ref={containerRef}>
+      
+      {/* Background DarkVeil (Pass scrollProgress agar animasi jalan) */}
       <div style={{position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: -1}}>
-        <DarkVeil hueShift={0} />
+        <DarkVeil scrollProgress={scrollProgress} hueShift={0} />
       </div>
 
       <div style={{position: 'fixed', top: 0, width: '100%', zIndex: 50}}>
@@ -55,18 +74,18 @@ const Portfolio = () => {
 
       <div className="portfolio-content">
         
-        {/* HEADER: TOTAL BALANCE */}
+        {/* HEADER BALANCE */}
         <div className="balance-card">
           <div className="balance-label">Total Portfolio Value</div>
           <h1 className="balance-amount">{formatUSD(totalBalance)}</h1>
           <div className="balance-change positive">
-            + $1,240.50 (24h) {/* Dummy Data */}
+            + $1,240.50 (24h)
           </div>
         </div>
 
         {/* ACTION BUTTON */}
         <div className="portfolio-actions">
-          <button className="btn-add-asset" onClick={() => alert("Fitur Database belum aktif. Nanti kita sambungkan ke Supabase!")}>
+          <button className="btn-add-asset" onClick={() => alert("Fitur Database belum aktif.")}>
             <span>+</span> Add New Asset
           </button>
         </div>
