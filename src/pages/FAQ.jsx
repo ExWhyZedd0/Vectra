@@ -75,7 +75,7 @@ const FAQ = () => {
 
         <div style={{textAlign: 'center', marginTop: '4rem', color: '#9ca3af'}}>
           <p>Still have questions?</p>
-          <a href="mailto:support@vectra.com" style={{color: '#00FFA3', textDecoration: 'none', fontWeight: 'bold'}}>Contact Support &rarr;</a>
+          <a href="mailto:support@vectra-cex.site" style={{color: '#00FFA3', textDecoration: 'none', fontWeight: 'bold'}}>Contact Support &rarr;</a>
         </div>
       </div>
     </div>
