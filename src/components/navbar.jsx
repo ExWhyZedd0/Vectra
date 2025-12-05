@@ -1,26 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
-import { supabase } from '../supabaseClient'; // Import Supabase
+import { supabase } from '../supabaseClient';
 import '../CSS/navbar.css';
 
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(null); // State User
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
   const closeMenu = () => setIsOpen(false);
 
-  // Cek status login saat komponen dimuat
   useEffect(() => {
-    // 1. Cek sesi saat ini
     const getSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       setUser(session?.user ?? null);
     };
     getSession();
 
-    // 2. Pasang Listener (Real-time update jika login/logout)
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null);
     });
@@ -28,11 +25,10 @@ export const Navbar = () => {
     return () => subscription.unsubscribe();
   }, []);
 
-  // Fungsi Logout
   const handleLogout = async () => {
     await supabase.auth.signOut();
     closeMenu();
-    navigate('/'); // Kembali ke home setelah logout
+    navigate('/');
   };
 
   return (
@@ -56,32 +52,27 @@ export const Navbar = () => {
           
           <ul className="nav-menu-list">
             <li><NavLink to="/market" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={closeMenu}>Market</NavLink></li>
-            
-            {/* MENU BARU: PORTFOLIO (Hanya muncul jika user Login) */}
             {user && (
-              <li>
-                <NavLink to="/portfolio" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={closeMenu}>
-                  Portfolio
-                </NavLink>
-              </li>
+              <li><NavLink to="/portfolio" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={closeMenu}>Portfolio</NavLink></li>
             )}
-            
             <li><NavLink to="/news" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={closeMenu}>News</NavLink></li>
             <li><NavLink to="/about" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={closeMenu}>About</NavLink></li>
             <li><NavLink to="/faq" className={({ isActive }) => isActive ? "nav-item active" : "nav-item"} onClick={closeMenu}>FAQ</NavLink></li>
           </ul>
 
+          {/* PEMISAH DESKTOP (Dihide di mobile via CSS) */}
+          {!isOpen && <div className="desktop-divider" style={{width:'1px', height:'24px', background:'rgba(255,255,255,0.1)', margin:'0 1rem'}}></div>}
+
           <div className="nav-auth-group">
-            {/* LOGIKA KONDISIONAL: Jika User ada, tampilkan Logout. Jika tidak, tampilkan Login/Register */}
             {user ? (
-              <div style={{display:'flex', alignItems:'center', gap:'15px'}}>
+              <div style={{display:'flex', flexDirection: isOpen ? 'column' : 'row', alignItems:'center', gap: isOpen ? '1rem' : '15px', width: isOpen ? '100%' : 'auto'}}>
                 <span style={{color: '#9ca3af', fontSize:'0.9rem', fontFamily:'Fredoka'}}>
                   Hi, {user.user_metadata.full_name || 'Trader'}
                 </span>
                 <button 
                   onClick={handleLogout} 
                   className="nav-item" 
-                  style={{background:'transparent', border:'none', cursor:'pointer'}}
+                  style={{background:'transparent', border: isOpen ? '1px solid rgba(255,255,255,0.2)' : 'none', cursor:'pointer', padding: isOpen ? '10px' : '0', width: isOpen ? '100%' : 'auto', borderRadius: '8px'}}
                 >
                   Logout
                 </button>
