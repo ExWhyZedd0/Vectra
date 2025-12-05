@@ -1,3 +1,113 @@
+/* Container Utama Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Pastikan Logo kiri, sisa konten kanan */
+  padding: 1rem 2rem;
+  
+  width: 90%;
+  max-width: 1280px;
+  margin: 1.5rem auto 0 auto;
+  
+  position: relative; /* Induk relatif untuk absolute centering */
+  z-index: 100;
+
+  /* Glass Effect */
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Logo (Kiri) */
+.nav-logo {
+  font-family: 'Audiowide', cursive;
+  font-size: 1.5rem;
+  color: white;
+  text-decoration: none;
+  z-index: 101;
+  position: relative; /* Agar tetap bisa diklik */
+}
+
+.nav-logo span {
+  color: #00FFA3;
+}
+
+/* Wrapper Navigasi (Desktop) */
+.nav-links {
+  display: flex;
+  align-items: center;
+  /* Kita tidak set width 100% di sini agar tidak mengganggu layout */
+}
+
+/* === PERBAIKAN TENGAH PRESISI (ABSOLUTE CENTERING) === */
+/* Hanya berlaku di Desktop */
+@media (min-width: 769px) {
+  .nav-menu-list {
+    position: absolute;       /* Lepaskan dari aliran normal */
+    left: 50%;                /* Taruh titik awal di 50% layar */
+    transform: translateX(-50%); /* Geser balik 50% dari lebar menu sendiri */
+    
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    white-space: nowrap;      /* Mencegah teks turun baris */
+  }
+
+  /* Pastikan container nav-links di desktop mengambil sisa ruang untuk dorong Auth ke kanan */
+  .nav-links {
+    flex-grow: 1;
+    justify-content: flex-end; /* Dorong Auth ke paling kanan */
+  }
+}
+
+/* Tombol Auth (Kanan) */
+.nav-auth-group {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  z-index: 101; /* Pastikan di atas layer lain */
+}
+
+/* Styling Menu Item */
+.nav-item {
+  text-decoration: none;
+  color: #9ca3af;
+  font-family: 'Fredoka', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: #00FFA3;
+  text-shadow: 0 0 8px rgba(0, 255, 163, 0.4);
+}
+
+/* Tombol Register */
+.btn-register {
+  background: rgba(0, 255, 163, 0.1);
+  border: 1px solid #00FFA3;
+  color: #00FFA3;
+  padding: 8px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-family: 'Audiowide', cursive;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.btn-register:hover {
+  background: #00FFA3;
+  color: black;
+  box-shadow: 0 0 15px rgba(0, 255, 163, 0.4);
+}
+
 /* === MOBILE RESPONSIVE (HP) === */
 .menu-toggle {
   display: none;
