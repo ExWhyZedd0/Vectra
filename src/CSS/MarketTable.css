@@ -182,3 +182,57 @@
   color: #6b7280;
   background-color: transparent;
 }
+
+.btn-buy-small {
+  background: rgba(0, 255, 163, 0.1);
+  border: 1px solid #00FFA3;
+  color: #00FFA3;
+  padding: 5px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Audiowide', cursive;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.btn-buy-small:hover {
+  background: #00FFA3;
+  color: black;
+  transform: scale(1.05);
+}
+
+/* CSS/MarketTable.css */
+
+.btn-action {
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Audiowide', cursive;
+  font-size: 0.75rem;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+/* Tombol Buy */
+.btn-buy {
+  background: rgba(0, 255, 163, 0.1);
+  border: 1px solid #00FFA3;
+  color: #00FFA3;
+}
+.btn-buy:hover {
+  background: #00FFA3;
+  color: black;
+  transform: translateY(-2px);
+}
+
+/* Tombol Sell */
+.btn-sell {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid #ef4444;
+  color: #ef4444;
+}
+.btn-sell:hover {
+  background: #ef4444;
+  color: white;
+  transform: translateY(-2px);
+}
