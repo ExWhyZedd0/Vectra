@@ -2,14 +2,14 @@
 .navbar {
   display: flex;
   align-items: center;
-  justify-content: space-between; /* Pastikan Logo kiri, sisa konten kanan */
+  justify-content: space-between; 
   padding: 1rem 2rem;
   
   width: 90%;
   max-width: 1280px;
   margin: 1.5rem auto 0 auto;
   
-  position: relative; /* Induk relatif untuk absolute centering */
+  position: relative; 
   z-index: 100;
 
   /* Glass Effect */
@@ -28,7 +28,7 @@
   color: white;
   text-decoration: none;
   z-index: 101;
-  position: relative; /* Agar tetap bisa diklik */
+  position: relative; 
 }
 
 .nav-logo span {
@@ -39,29 +39,29 @@
 .nav-links {
   display: flex;
   align-items: center;
-  /* Kita tidak set width 100% di sini agar tidak mengganggu layout */
+ 
 }
 
 /* === PERBAIKAN TENGAH PRESISI (ABSOLUTE CENTERING) === */
 /* Hanya berlaku di Desktop */
 @media (min-width: 769px) {
   .nav-menu-list {
-    position: absolute;       /* Lepaskan dari aliran normal */
-    left: 50%;                /* Taruh titik awal di 50% layar */
-    transform: translateX(-50%); /* Geser balik 50% dari lebar menu sendiri */
+    position: absolute;       
+    left: 50%;                
+    transform: translateX(-50%); 
     
     display: flex;
     gap: 2rem;
     list-style: none;
     padding: 0;
     margin: 0;
-    white-space: nowrap;      /* Mencegah teks turun baris */
+    white-space: nowrap;
   }
 
   /* Pastikan container nav-links di desktop mengambil sisa ruang untuk dorong Auth ke kanan */
   .nav-links {
     flex-grow: 1;
-    justify-content: flex-end; /* Dorong Auth ke paling kanan */
+    justify-content: flex-end; 
   }
 }
 
@@ -70,13 +70,13 @@
   display: flex;
   gap: 1rem;
   align-items: center;
-  z-index: 101; /* Pastikan di atas layer lain */
+  z-index: 101; 
 }
 
 /* Styling Menu Item */
 .nav-item {
   text-decoration: none;
-  color: #9ca3af;
+  color: #d6d6d6;
   font-family: 'Fredoka', sans-serif;
   font-size: 0.95rem;
   font-weight: 500;
@@ -161,7 +161,7 @@
     margin-top: 0;
     border: none;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(6, 0, 16, 0.95); /* Sedikit lebih pekat */
+    background: rgba(6, 0, 16, 0.95); 
     justify-content: space-between;
   }
 
@@ -171,16 +171,15 @@
     top: 0;
     right: 0;
     height: 100vh;
-    width: 280px; /* Sedikit diperlebar agar lega */
+    width: 280px; 
     background-color: #060010;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
     
     display: flex;
     flex-direction: column;
-    /* justify-content: center; <-- Hapus ini agar start dari atas */
     align-items: center;
-    padding-top: 5rem; /* Jarak dari atas */
-    gap: 0; /* Kita atur gap manual di elemen anak */
+    padding-top: 5rem;
+    gap: 0; 
     
     transform: translateX(100%);
     transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -194,11 +193,10 @@
 
   /* 1. GRUP AUTH (LOGIN/REGISTER) - PINDAH KE ATAS */
   .nav-auth-group {
-    order: -1; /* MAGIC: Pindah ke urutan paling atas */
-    
+    order: -1; 
     display: flex;
-    flex-direction: column; /* Tombol jadi atas-bawah agar besar */
-    width: 80%; /* Lebar tombol 80% dari sidebar */
+    flex-direction: column; 
+    width: 80%; 
     gap: 1rem;
     
     /* GARIS PEMBATAS (SEKAT) DI BAWAHNYA */
@@ -212,8 +210,8 @@
   .nav-auth-group .btn-register {
     text-align: center;
     width: 100%;
-    box-sizing: border-box; /* Agar padding tidak merusak lebar */
-    padding: 12px; /* Tombol lebih besar untuk jari */
+    box-sizing: border-box; 
+    padding: 12px;
   }
 
   /* 2. MENU LIST (BAWAH) */
@@ -230,7 +228,6 @@
     font-size: 1.1rem;
   }
 
-  /* Sembunyikan Divider Desktop (Garis Vertikal) jika ada */
   .desktop-divider {
     display: none !important;
   }

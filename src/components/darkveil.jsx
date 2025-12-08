@@ -65,11 +65,11 @@ void mainImage(out vec4 fragColor,in vec2 fragCoord){
     float intensity = cppn_fn(uv,0.1*sin(0.3*uTime),0.1*sin(0.69*uTime),0.1*sin(0.44*uTime)).r;
 
     // Palet 1: Warna untuk Hero Section (Gelap/Hijau)
-    vec3 heroBg = vec3(0.0, 0.15, 0.1);      // Warna hijau gelap
+    vec3 heroBg = vec3(0.059, 0.059, 0.059);         // Warna hijau gelap vec3(0.0, 0.15, 0.1)
     vec3 heroAccent = vec3(0.0, 1.0, 0.64);     // #00FFA3
 
     // Palet 2: Warna untuk Body Section (Hitam Pekat/Hijau)
-    vec3 bodyBg = vec3(0.0117, 0.0117, 0.0157); // #030304
+    vec3 bodyBg = vec3(0.0117, 0.0117, 0.0157);  // #030304
     vec3 bodyAccent = vec3(0.0, 1.0, 0.64);      // #00FFA3
 
     vec3 heroColor = mix(heroBg, heroAccent, intensity);

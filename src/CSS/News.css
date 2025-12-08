@@ -140,7 +140,7 @@
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
-  text-decoration: none; /* Hilangkan garis bawah link */
+  text-decoration: none;
   color: white;
 }
 
@@ -154,7 +154,7 @@
 /* Image Section */
 .news-image-wrapper {
   width: 100%;
-  height: 180px; /* Tinggi gambar tetap */
+  height: 180px; 
   position: relative;
   overflow: hidden;
   background-color: #000;
@@ -163,12 +163,12 @@
 .news-image {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Agar gambar tidak gepeng */
+  object-fit: cover; 
   transition: transform 0.5s ease;
 }
 
 .news-card:hover .news-image {
-  transform: scale(1.05); /* Zoom effect saat hover */
+  transform: scale(1.05); 
 }
 
 .news-image-placeholder {
@@ -238,5 +238,5 @@
   font-size: 0.875rem;
   color: #9ca3af;
   line-height: 1.5;
-  margin-top: auto; /* Dorong ke bawah jika konten pendek */
+  margin-top: auto; 
 }

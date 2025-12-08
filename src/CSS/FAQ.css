@@ -97,8 +97,8 @@
   padding: 1.5rem;
   border-radius: 1rem;
   transition: all 0.3s ease;
-  cursor: pointer; /* Indikasi bisa diklik (Mobile) */
-  overflow: hidden; /* Penting untuk animasi slide */
+  cursor: pointer; 
+  overflow: hidden; 
 }
 
 /* Hover Effect */
@@ -155,14 +155,14 @@
 }
 
 .faq-item.active .faq-icon {
-  transform: rotate(180deg); /* Putar panah */
+  transform: rotate(180deg);
   color: #00FFA3;
 }
 
 .faq-item.active .faq-answer-wrapper {
-  max-height: 300px; /* Cukup tinggi untuk menampung teks */
+  max-height: 300px; 
   opacity: 1;
-  margin-top: 1rem; /* Jarak dari judul */
+  margin-top: 1rem; 
 }
 
 /* === DESKTOP OVERRIDES (MATIKAN DROPDOWN) === */
@@ -171,7 +171,7 @@
   .faq-item {
     cursor: default; 
     padding: 2rem;
-    height: 100%; /* Agar tinggi rata dalam grid */
+    height: 100%; 
   }
 
   /* Hilangkan Icon Panah */
@@ -181,7 +181,7 @@
 
   /* Paksa Jawaban Selalu Muncul */
   .faq-answer-wrapper {
-    max-height: none !important; /* Override animasi */
+    max-height: none !important; 
     opacity: 1 !important;
     margin-top: 1rem !important;
     overflow: visible;

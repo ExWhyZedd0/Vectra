@@ -27,13 +27,13 @@
 @media (min-width: 768px) {
   .bento-grid {
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 250px); /* Tinggi baris tetap */
+    grid-template-rows: repeat(2, 250px); 
   }
 }
 
 @media (min-width: 1024px) {
   .bento-grid {
-    grid-template-columns: 2fr 1fr 1fr; /* Kolom 1 lebih lebar */
+    grid-template-columns: 2fr 1fr 1fr; 
     grid-template-rows: 250px 250px;
   }
 }
@@ -61,15 +61,15 @@
 
 /* === KOTAK SPESIFIK: TRENDING (Most Popular) === */
 .bento-trending {
-  grid-column: span 1; /* Default mobile */
+  grid-column: span 1; 
   display: flex;
   flex-direction: column;
 }
 
 @media (min-width: 1024px) {
   .bento-trending {
-    grid-column: span 1; /* Di desktop ambil 1 slot kolom vertical */
-    grid-row: span 2; /* Memanjang ke bawah (Tall box) */
+    grid-column: span 1; 
+    grid-row: span 2; 
   }
 }
 
@@ -92,9 +92,9 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  flex: 1; /* Isi sisa ruang */
-  overflow-y: auto; /* Scroll jika kepanjangan */
-  padding-right: 5px; /* Space untuk scrollbar */
+  flex: 1;
+  overflow-y: auto; 
+  padding-right: 5px;
 }
 
 /* Item Koin Kecil */
@@ -150,7 +150,7 @@
 }
 @media (min-width: 1024px) {
   .bento-large {
-    grid-column: span 2; /* Lebar 2 kolom */
+    grid-column: span 2;
   }
 }
 

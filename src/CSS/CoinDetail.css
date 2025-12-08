@@ -41,7 +41,7 @@
   z-index: 10;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 120px 20px 50px 20px; /* Padding bawah ditambah agar tidak mentok */
+  padding: 120px 20px 50px 20px; 
 }
 
 /* Tombol Back */
@@ -115,7 +115,7 @@
 /* Layout Grid (Chart & Stats) */
 .detail-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr; /* Chart lebih lebar */
+  grid-template-columns: 2fr 1fr; 
   gap: 20px;
 }
 

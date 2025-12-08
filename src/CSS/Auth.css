@@ -7,7 +7,6 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  /* Background transparan agar DarkVeil terlihat */
   background-color: transparent; 
 }
 

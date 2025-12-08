@@ -4,7 +4,7 @@
   background-color: rgba(255, 255, 255, 0.02);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 1rem;
-  padding: 1.5rem; /* Sedikit diperbesar */
+  padding: 1.5rem; 
   box-sizing: border-box;
 }
 
@@ -84,7 +84,6 @@
 .table-scroll-wrapper {
   width: 100%;
   overflow-x: auto;
-  /* Scrollbar custom untuk Webkit (Chrome/Safari) */
   scrollbar-width: thin;
   scrollbar-color: #00FFA3 rgba(255, 255, 255, 0.05);
 }
@@ -106,7 +105,7 @@
 /* Tabel */
 .market-table {
   width: 100%;
-  border-collapse: separate; /* Penting untuk sticky header */
+  border-collapse: separate;
   border-spacing: 0;
   color: white;
   min-width: 600px;
@@ -151,7 +150,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem; /* Jarak antar tombol */
+  gap: 1rem; 
   margin-top: 2rem;
   padding-top: 1rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -166,7 +165,7 @@
   font-family: 'Audiowide', cursive;
   cursor: pointer;
   transition: all 0.3s ease;
-  min-width: 40px; /* Agar tombol << tidak kekecilan */
+  min-width: 40px; 
 }
 
 .pagination-btn:hover:not(:disabled) {
@@ -200,8 +199,6 @@
   color: black;
   transform: scale(1.05);
 }
-
-/* CSS/MarketTable.css */
 
 .btn-action {
   padding: 6px 12px;

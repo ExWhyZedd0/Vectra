@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import BuyAssetModal from './BuyAssetModal'; // Menggunakan nama baru
+import BuyAssetModal from './BuyAssetModal';
 import SellAssetModal from './SellAssetModal';
 import '../CSS/MarketTable.css';
 
@@ -20,15 +20,15 @@ const MarketTable = () => {
   const [holdingsMap, setHoldingsMap] = useState({}); // { 'bitcoin': { amount: 0.5, db_id: 123 } }
 
   // --- STATE MODALS ---
-  const [selectedCoin, setSelectedCoin] = useState(null); // Data untuk Modal Beli
-  const [selectedSellAsset, setSelectedSellAsset] = useState(null); // Data untuk Modal Jual
+  const [selectedCoin, setSelectedCoin] = useState(null); // Modal Beli
+  const [selectedSellAsset, setSelectedSellAsset] = useState(null); // Modal Jual
   const [isBuyModalOpen, setIsBuyModalOpen] = useState(false);
   const [isSellModalOpen, setIsSellModalOpen] = useState(false);
   
   const hasFetched = useRef(false);
   const navigate = useNavigate();
 
-  // 1. FUNGSI FETCH HOLDINGS (Supabase)
+  // FETCH HOLDINGS (Supabase)
   // Dipanggil saat awal load DAN setelah transaksi berhasil
   const fetchUserHoldings = async () => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -58,7 +58,7 @@ const MarketTable = () => {
     fetchUserHoldings();
   }, []);
 
-  // 2. FUNGSI FETCH MARKET DATA (CoinGecko)
+  // MARKET DATA (CoinGecko)
   useEffect(() => {
     if (hasFetched.current) return;
     hasFetched.current = true;
@@ -84,7 +84,7 @@ const MarketTable = () => {
     fetchCoins();
   }, []);
 
-  // 3. LOGIKA FILTER & SORTING
+  // FILTER & SORTING
   let filteredData = coins.filter(coin => 
     coin.name.toLowerCase().includes(search.toLowerCase()) || 
     coin.symbol.toLowerCase().includes(search.toLowerCase())

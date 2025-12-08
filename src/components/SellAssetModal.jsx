@@ -10,7 +10,7 @@ const SellAssetModal = ({ isOpen, onClose, asset, onSuccess }) => {
 
   // --- FITUR BARU: TOMBOL MAX ---
   const handleMaxClick = () => {
-    setAmount(asset.amount); // Isi input dengan semua jumlah aset
+    setAmount(asset.amount);
   };
 
   const handleSell = async (e) => {
@@ -85,7 +85,7 @@ const SellAssetModal = ({ isOpen, onClose, asset, onSuccess }) => {
                 onChange={e => setAmount(e.target.value)}
                 required
                 autoFocus
-                style={{paddingRight: '60px', marginBottom: '15px'}} // Beri jarak kanan untuk tombol Max
+                style={{paddingRight: '60px', marginBottom: '15px'}}
               />
               
               {/* TOMBOL MAX */}

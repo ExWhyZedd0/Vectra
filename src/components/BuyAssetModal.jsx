@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import '../CSS/Portfolio.css'; 
 
-// UBAH NAMA KOMPONEN DI SINI
 const BuyAssetModal = ({ isOpen, onClose, coinId, currentPrice, coinSymbol, image, onSuccess }) => {
   const [amount, setAmount] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Navbar } from '../components/navbar';
 import DarkVeil from '../components/darkveil';
 import { supabase } from '../supabaseClient';
-import SellAssetModal from '../components/SellAssetModal'; // Import Modal Sell
+import SellAssetModal from '../components/SellAssetModal';
 import '../CSS/Portfolio.css';
 
 const Portfolio = () => {

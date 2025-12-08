@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../CSS/BentoBox.css'; // Import CSS Baru
+import '../CSS/BentoBox.css';
 
 const BentoBox = ({ isVisible }) => {
   const [trending, setTrending] = useState([]);
